@@ -11,7 +11,7 @@ So to be able to run EQL queries against.
 
 There is also support for [JSON-Schema](https://json-schema.org/) to validate a `.hery` file.
 
-## How it works?
+## 🤔 How it works?
 It runs 100% on the frontend. And no it doesn't use any of the overly complicated JS frameworks like React and Angular 🤮.
 To get a more deep understand of how it works: [.docs/dev.md](.docs/dev.md).
 
@@ -21,15 +21,15 @@ through the tabs the DB explorer if a [SQLite3](https://www.sqlite.org/) db file
 It is possible to upload or drag & drop a [YAML](https://yaml.org/)/`.hery` file or/and a [SQLite3](https://www.sqlite.org/) db file into the playground
 and everything will automatically load into the editor without a page reload.
 
-## Why?
+## 💡 Why?
 It is possible to try out EQL queries with HERY but the terminal environment is not as fun, intuitive and easy to use than
 a playground. Same goes for IDEs.
 
-## Production? Staging? Dev?
+## 🌳 Production? Staging? Dev?
 Yes it can be used in different environments where it can interact via an HTTP server with HERY. That said it would
 be wise to make sure the public does not have access to it for security reasons.
 
-## Requirements
+## ✅ Requirements
 These are main browser supports that are required: 
 - [wasm](https://caniuse.com/wasm)
 - [FileAPI](https://caniuse.com/fileapi)
@@ -37,6 +37,7 @@ These are main browser supports that are required:
 There is no need for: [Web SQL Database](https://caniuse.com/sql-storage) since [sql.js](https://github.com/sql-js/sql.js/)
 does not require it to work with [SQLite3](https://www.sqlite.org/) db files.
 
+> [!NOTE]
 > Most modern browsers from 2017 and up should work with the HERY - Playground. Even mobile web browsers should also work.
 > That said the UX might be awkward to use on a smaller screen. 
 
