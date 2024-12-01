@@ -32,5 +32,6 @@ tests.sh
 
 # Build
 hery-playground
+*.wasm
 
 allcode.txt

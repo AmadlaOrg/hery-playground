@@ -13,13 +13,13 @@
 
 <pre id="output"></pre>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.1/sql-wasm.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.min.js"></script>
 <script>
     let go = new Go(); // Defined in wasm_exec.js
     let db;
 
     // Load Go WebAssembly binary
-    WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then(result => {
+    WebAssembly.instantiateStreaming(fetch('browser.wasm'), go.importObject).then(result => {
         go.run(result.instance);
 
         // Interact with the WebAssembly instance, e.g., call the 'add' function
@@ -35,7 +35,7 @@
 
         reader.onload = function(event) {
             // Open SQLite database from the dropped file
-            SQL.load({locateFile: file => 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.1/'})
+            SQL.load({locateFile: file => 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/'})
                 .then(SQL => {
                     db = new SQL.Database(new Uint8Array(event.target.result));
                     document.getElementById('output').textContent = "Database opened successfully!";
@@ -62,6 +62,6 @@
     }
 </script>
 
-<script src="https://golang.org/x/tools/cmd/wasm_exec.js"></script>
+<script src="assets/wasm_exec.js"></script>
 </body>
 </html>

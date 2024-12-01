@@ -1,7 +1,6 @@
 package browser
 
 import (
-	"fmt"
 	"syscall/js"
 )
 

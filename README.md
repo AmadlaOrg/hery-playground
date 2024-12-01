@@ -11,7 +11,7 @@ So to be able to run EQL queries against.
 
 There is also support for [JSON-Schema](https://json-schema.org/) to validate a `.hery` file.
 
-## 🤔 How it works?
+## 🤔 How does it work?
 It runs 100% on the frontend. And no it doesn't use any of the overly complicated JS frameworks like React and Angular 🤮.
 To get a more deep understand of how it works: [.docs/dev.md](.docs/dev.md).
 
