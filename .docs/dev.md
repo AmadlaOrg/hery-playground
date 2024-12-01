@@ -8,3 +8,4 @@ It is time to put an end to over complicated front end's.
 This is why the only two libraries used are: 
 - [HTMX](https://htmx.org/)
 - [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- [sql.js](https://github.com/sql-js/sql.js/)
