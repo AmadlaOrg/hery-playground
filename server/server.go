@@ -5,20 +5,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type IServer interface{}
+type IServer interface {
+	Start() error
+}
 
 type SServer struct {
 	controller   controller.IController
 	serverEngine *gin.Engine
 }
 
-func (s *SServer) Start() {
+func (s *SServer) Start() error {
 	s.serverEngine = gin.Default()
 	s.router()
 	err := s.serverEngine.Run(":8080")
 	if err != nil {
-		return
+		return err
 	}
+	return nil
 }
 
 func (s *SServer) router() {
