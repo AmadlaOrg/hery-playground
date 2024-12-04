@@ -1,10 +1,14 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/AmadlaOrg/hery-playground/server/controller"
+	"github.com/gin-gonic/gin"
+)
 
 type IServer interface{}
 
 type SServer struct {
+	controller   controller.IController
 	serverEngine *gin.Engine
 }
 

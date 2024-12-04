@@ -1,67 +1,26 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Go + SQLite in Browser</title>
-</head>
-<body>
-<h1>SQLite Business Logic in WebAssembly</h1>
-
-<!-- Dropzone for the SQLite database -->
-<div id="dropzone" style="width: 400px; height: 400px; border: 2px dashed #ccc;">
-    Drag and drop your SQLite .db file here.
-</div>
-
-<pre id="output"></pre>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.min.js"></script>
-<script>
-    let go = new Go(); // Defined in wasm_exec.js
-    let db;
-
-    // Load Go WebAssembly binary
-    WebAssembly.instantiateStreaming(fetch('browser.wasm'), go.importObject).then(result => {
-        go.run(result.instance);
-
-        // Interact with the WebAssembly instance, e.g., call the 'add' function
-        window.add(3, 4); // Call Go's 'add' function
-    });
-
-    // Handle drag and drop
-    document.getElementById('dropzone').addEventListener('drop', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const file = e.dataTransfer.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-            // Open SQLite database from the dropped file
-            SQL.load({locateFile: file => 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/'})
-                .then(SQL => {
-                    db = new SQL.Database(new Uint8Array(event.target.result));
-                    document.getElementById('output').textContent = "Database opened successfully!";
-                    displayDatabase();
-                });
-        };
-
-        reader.readAsArrayBuffer(file);
-    });
-
-    // Display table names in the SQLite database
-    function displayDatabase() {
-        try {
-            const res = db.exec("SELECT name FROM sqlite_master WHERE type='table';");
-            let output = 'Tables in database:\n';
-            res[0].values.forEach(table => {
-                output += table[0] + '\n';
-            });
-            document.getElementById('output').textContent = output;
-        } catch (err) {
-            console.error(err);
-            document.getElementById('output').textContent = 'Error loading database.';
-        }
-    }
-</script>
-
-<script src="assets/wasm_exec.js"></script>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🛝 Hery - Playground 🛝</title>
+        <link rel="stylesheet" href="assets/jquery-ui.css">
+        <link rel="stylesheet" href="assets/style.css">
+    </head>
+    <body>
+        <h1>🛝 Hery - Playground 🛝</h1>
+        <!-- Dropzone for the SQLite database -->
+        <div id="dropzone" style="width: 400px; height: 400px; border: 2px dashed #ccc;">
+            Drag and drop your SQLite .db file here.
+        </div>
+        <pre id="output"></pre>
+        <div id="container"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/loader.js"></script>
+        <script src="assets/hery.editor.js"></script>
+        <script src="assets/eql.editor.js"></script>
+        <script src="assets/cache.editor.js"></script>
+        <script src="assets/wasm_exec.js"></script>
+        <script src="https://code.jquery.com/jquery-4.0.0-beta.2.min.js"></script>
+    </body>
 </html>
