@@ -9,11 +9,84 @@
         <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
-        <h1>🛝 Hery - Playground 🛝</h1>
+        <!--<header class="pf-v6-c-masthead" id="basic-masthead">
+            <div class="pf-v6-c-masthead__main">
+                <div class="pf-v6-c-masthead__brand">
+                    <h1>🛝 Hery - Playground 🛝</h1>
+                </div>
+            </div>
+            <div class="pf-v6-c-masthead__content">-->
+                <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs">
+                    <h1 class="pf-v6-c-title pf-m-4xl">Hery - Playground 🛝</h1>
+                    <div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
+                        <button
+                                class="pf-v6-c-button pf-m-plain"
+                                type="button"
+                                aria-label="Scroll left"
+                                disabled
+                        >
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-angle-left" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </div>
+                    <ul class="pf-v6-c-tabs__list" role="tablist">
+                        <li class="pf-v6-c-tabs__item" role="presentation">
+                            <button
+                                    type="button"
+                                    class="pf-v6-c-tabs__link"
+                                    role="tab"
+                                    id="box-tabs-users-link"
+                            >
+                                <span class="pf-v6-c-tabs__item-text">EQL - Entity Query Language</span>
+                            </button>
+                        </li>
+                        <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
+                            <button
+                                    type="button"
+                                    class="pf-v6-c-tabs__link"
+                                    role="tab"
+                                    id="box-tabs-containers-link"
+                            >
+                                <span class="pf-v6-c-tabs__item-text">HERY file</span>
+                            </button>
+                        </li>
+                        <li class="pf-v6-c-tabs__item" role="presentation">
+                            <button
+                                    type="button"
+                                    class="pf-v6-c-tabs__link"
+                                    role="tab"
+                                    id="box-tabs-database-link"
+                            >
+                                <span class="pf-v6-c-tabs__item-text">Cache</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
+                        <button
+                                class="pf-v6-c-button pf-m-plain"
+                                type="button"
+                                aria-label="Scroll right"
+                                disabled
+                        >
+      <span class="pf-v6-c-button__icon">
+        <i class="fas fa-angle-right" aria-hidden="true"></i>
+      </span>
+                        </button>
+                    </div>
+                </div>
+            <!--</div>
+        </header>-->
+
         <!-- Dropzone for the SQLite database -->
         <div id="dropzone" style="width: 400px; height: 400px; border: 2px dashed #ccc;">
             Drag and drop your SQLite .db file here.
         </div>
+
+        <div id="eql-editor" style="width:800px;height:600px;border:1px solid grey"></div>
+        <div id="hery-editor" style="width:800px;height:600px;border:1px solid grey"></div>
+
         <pre id="output"></pre>
         <div id="container"></div>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.min.js"></script>-->
@@ -26,5 +99,32 @@
         <script src="assets/library/node_modules/jquery-ui/dist/jquery-ui.min.js"></script>
         <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
         <script src="assets/library/node_modules/sql.js/dist/sql-wasm.js"></script>
+
+        <script>
+            // Initialize Monaco Editor
+            /*require.config({ paths: { 'vs': 'assets/library/node_modules/monaco-editor/min/vs' }});
+            require(['vs/editor/editor.main'], function() {
+                var editor = monaco.editor.create(document.getElementById('monaco-container'), {
+                    value: "// Monaco Editor is ready!",
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true
+                });
+
+                // Ensure Monaco resizes to fill its container
+                editor.layout();
+            });*/
+            require.config({ paths: { vs: 'assets/library/node_modules/monaco-editor/min/vs' } });
+            require(['vs/editor/editor.main'], function () {
+                var eqlEditor = monaco.editor.create(document.getElementById('eql-editor'), {
+                    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                    language: 'javascript'
+                });
+                var heryEditor = monaco.editor.create(document.getElementById('hery-editor'), {
+                    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                    language: 'javascript'
+                });
+            });
+        </script>
     </body>
 </html>

@@ -25,11 +25,13 @@ func (s *SServer) Start() error {
 }
 
 func (s *SServer) router() {
+
+	s.serverEngine.Static("/assets", "./browser/frontend/assets")
+
 	s.serverEngine.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello, world!",
-		})
+		c.File("./browser/frontend/index.html")
 	})
+
 	s.serverEngine.GET("/:collectionName", func(c *gin.Context) {
 		// Retrieve the 'collectionName' from the URL
 		collectionName := c.Param("collectionName")
