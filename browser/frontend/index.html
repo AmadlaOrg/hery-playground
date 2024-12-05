@@ -6,6 +6,7 @@
         <title>🛝 Hery - Playground 🛝</title>
         <link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly.min.css">
         <!--<link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly-addons.css">-->
+        <link rel="stylesheet" href="assets/library/node_modules/jquery-ui/dist/themes/base/jquery-ui.min.css">
         <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
@@ -16,9 +17,10 @@
                 </div>
             </div>
             <div class="pf-v6-c-masthead__content">-->
-                <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs">
+        <div id="tabs">
+            <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs">
                     <h1 class="pf-v6-c-title pf-m-4xl">Hery - Playground 🛝</h1>
-                    <div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
+                    <!--<div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
                         <button
                                 class="pf-v6-c-button pf-m-plain"
                                 type="button"
@@ -29,41 +31,44 @@
                             <i class="fas fa-angle-left" aria-hidden="true"></i>
                           </span>
                         </button>
-                    </div>
+                    </div>-->
                     <ul class="pf-v6-c-tabs__list" role="tablist">
                         <li class="pf-v6-c-tabs__item" role="presentation">
-                            <button
+                            <a
                                     type="button"
                                     class="pf-v6-c-tabs__link"
                                     role="tab"
-                                    id="box-tabs-users-link"
+                                    id="box-tabs-eql-link"
+                                    href="#tabs-eql"
                             >
                                 <span class="pf-v6-c-tabs__item-text">EQL - Entity Query Language</span>
-                            </button>
+                            </a>
                         </li>
                         <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
-                            <button
+                            <a
                                     type="button"
                                     class="pf-v6-c-tabs__link"
                                     role="tab"
-                                    id="box-tabs-containers-link"
+                                    id="box-tabs-hery-file-link"
+                                    href="#tabs-hery-file"
                             >
                                 <span class="pf-v6-c-tabs__item-text">HERY file</span>
-                            </button>
+                            </a>
                         </li>
                         <li class="pf-v6-c-tabs__item" role="presentation">
-                            <button
+                            <a
                                     type="button"
                                     class="pf-v6-c-tabs__link"
                                     role="tab"
-                                    id="box-tabs-database-link"
+                                    id="box-tabs-cache-link"
+                                    href="#tabs-cache"
                             >
                                 <span class="pf-v6-c-tabs__item-text">Cache</span>
-                            </button>
+                            </a>
                         </li>
                     </ul>
 
-                    <div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
+                    <!--<div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
                         <button
                                 class="pf-v6-c-button pf-m-plain"
                                 type="button"
@@ -74,32 +79,381 @@
         <i class="fas fa-angle-right" aria-hidden="true"></i>
       </span>
                         </button>
-                    </div>
+                    </div>-->
                 </div>
             <!--</div>
         </header>-->
 
-        <!-- Dropzone for the SQLite database -->
-        <div id="dropzone" style="width: 400px; height: 400px; border: 2px dashed #ccc;">
-            Drag and drop your SQLite .db file here.
+            <div class="pf-v6-l-split pf-m-gutter">
+                <div class="pf-v6-l-split__item pf-m-fill">
+                    <div id="tabs-eql">
+                        <h2 class="pf-v6-c-title pf-m-h2">EQL - Entity Query Language</h2>
+                        <div id="eql-editor" style="width:800px;height:600px;border:1px solid grey"></div>
+                    </div>
+                    <div id="tabs-hery-file">
+                        <h2 class="pf-v6-c-title pf-m-h2">HERY file</h2>
+                        <div id="hery-editor" style="width:800px;height:600px;border:1px solid grey"></div>
+                    </div>
+                    <div id="tabs-cache">
+                        <h2 class="pf-v6-c-title pf-m-h2">Cache</h2>
+                        <div class="pf-v6-l-split pf-m-gutter">
+                            <div class="pf-v6-l-split__item">
+                                <div class="pf-v6-c-tabs pf-m-vertical" role="region" id="vertical-tabs">
+                                <ul class="pf-v6-c-tabs__list" role="tablist">
+                                    <li class="pf-v6-c-tabs__item" role="presentation">
+                                        <button
+                                                type="button"
+                                                class="pf-v6-c-tabs__link"
+                                                role="tab"
+                                                id="vertical-tabs-users-link"
+                                        >
+                                            <span class="pf-v6-c-tabs__item-text">Users</span>
+                                        </button>
+                                    </li>
+                                    <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
+                                        <button
+                                                type="button"
+                                                class="pf-v6-c-tabs__link"
+                                                role="tab"
+                                                id="vertical-tabs-containers-link"
+                                        >
+                                            <span class="pf-v6-c-tabs__item-text">Containers</span>
+                                        </button>
+                                    </li>
+                                    <li class="pf-v6-c-tabs__item" role="presentation">
+                                        <button
+                                                type="button"
+                                                class="pf-v6-c-tabs__link"
+                                                role="tab"
+                                                id="vertical-tabs-database-link"
+                                        >
+                                            <span class="pf-v6-c-tabs__item-text">Database</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>
+                            <div class="pf-v6-l-split__item pf-m-fill">
+                                <table
+                                    class="pf-v6-c-table pf-m-grid-lg"
+                                    role="grid"
+                                    aria-label="This is a sortable table example"
+                                    id="table-sortable"
+                            >
+                                <thead class="pf-v6-c-table__thead">
+                                <tr
+                                        class="pf-v6-c-table__tr"
+                                        role&#x26;#x3D;&#x26;quot;row&#x26;quot;
+                                        [object
+                                        Object]
+                                >
+                                    <th
+                                            class="pf-v6-c-table__th pf-v6-c-table__check"
+                                            aria-label="Row select"
+                                            role="columnheader"
+                                            scope="col"
+                                    >
+                                        <label
+                                                class="pf-v6-c-check pf-m-standalone"
+                                                for="table-compact-checkrow-thead-check-input"
+                                        >
+                                            <input
+                                                    class="pf-v6-c-check__input"
+                                                    type="checkbox"
+                                                    id="table-compact-checkrow-thead-check-input-second"
+                                                    name="table-compact-checkrow-thead-check-input"
+                                                    aria-label="Select all rows"
+                                            />
+                                        </label>
+                                    </th>
+                                    <th
+                                            class="pf-v6-c-table__th pf-v6-c-table__sort pf-m-selected"
+                                            role="columnheader"
+                                            aria-sort="ascending"
+                                            scope="col"
+                                    >
+                                        <button class="pf-v6-c-table__button">
+                      <span class="pf-v6-c-table__button-content">
+                        <span class="pf-v6-c-table__text">Repositories</span>
+                        <span class="pf-v6-c-table__sort-indicator">
+                          <i class="fas fa-long-arrow-alt-up"></i>
+                        </span>
+                      </span>
+                                        </button>
+                                    </th>
+
+                                    <th
+                                            class="pf-v6-c-table__th pf-v6-c-table__sort pf-m-help"
+                                            role="columnheader"
+                                            aria-sort="none"
+                                            scope="col"
+                                    >
+                                        <div class="pf-v6-c-table__column-help">
+                                            <button class="pf-v6-c-table__button">
+                        <span class="pf-v6-c-table__button-content">
+                          <span class="pf-v6-c-table__text">Branches</span>
+                          <span class="pf-v6-c-table__sort-indicator">
+                            <i class="fas fa-arrows-alt-v"></i>
+                          </span>
+                        </span>
+                                            </button>
+                                            <span class="pf-v6-c-table__column-help-action">
+                        <button
+                                class="pf-v6-c-button pf-m-no-padding pf-m-plain"
+                                type="button"
+                                aria-label="aria-label&#x3D;&quot;More info&quot;"
+                        >
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-question-circle" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </span>
+                                        </div>
+                                    </th>
+
+                                    <th
+                                            class="pf-v6-c-table__th pf-v6-c-table__sort"
+                                            role="columnheader"
+                                            aria-sort="none"
+                                            scope="col"
+                                    >
+                                        <button class="pf-v6-c-table__button">
+                      <span class="pf-v6-c-table__button-content">
+                        <span class="pf-v6-c-table__text">Pull requests</span>
+                        <span class="pf-v6-c-table__sort-indicator">
+                          <i class="fas fa-arrows-alt-v"></i>
+                        </span>
+                      </span>
+                                        </button>
+                                    </th>
+
+                                    <th class="pf-v6-c-table__th" role="columnheader" scope="col">Workspaces</th>
+
+                                    <th class="pf-v6-c-table__th pf-m-help" role="columnheader" scope="col">
+                                        <div class="pf-v6-c-table__column-help">
+                                            <span class="pf-v6-c-table__text">Last commit</span>
+                                            <span class="pf-v6-c-table__column-help-action">
+                        <button
+                                class="pf-v6-c-button pf-m-no-padding pf-m-plain"
+                                type="button"
+                                aria-label="aria-label&#x3D;&quot;More info&quot;"
+                        >
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-question-circle" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </span>
+                                        </div>
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                                </thead>
+
+                                <tbody class="pf-v6-c-table__tbody" role="rowgroup">
+                                <tr
+                                        class="pf-v6-c-table__tr"
+                                        role&#x26;#x3D;&#x26;quot;row&#x26;quot;
+                                        [object
+                                        Object]
+                                >
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__check" aria-label="Check row">
+                                        <label
+                                                class="pf-v6-c-check pf-m-standalone"
+                                                for="table-compact-checkrow-1-check-input-second"
+                                        >
+                                            <input
+                                                    class="pf-v6-c-check__input"
+                                                    type="checkbox"
+                                                    id="table-compact-checkrow-1-check-input-second-one"
+                                                    name="table-compact-checkrow-1-check-input"
+                                                    aria-label="Select row"
+                                            />
+                                        </label>
+                                    </td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Repository name"
+                                    >Repository 1</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Branches">10</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Pull requests">25</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Workspaces">5</td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Last commit"
+                                    >2 days ago</td>
+                                </tr>
+
+                                <tr
+                                        class="pf-v6-c-table__tr"
+                                        role&#x26;#x3D;&#x26;quot;row&#x26;quot;
+                                        [object
+                                        Object]
+                                >
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__check" aria-label="Check row">
+                                        <label
+                                                class="pf-v6-c-check pf-m-standalone"
+                                                for="table-compact-checkrow-1-check-input"
+                                        >
+                                            <input
+                                                    class="pf-v6-c-check__input"
+                                                    type="checkbox"
+                                                    id="table-compact-checkrow-1-check-input-second-two"
+                                                    name="table-compact-checkrow-1-check-input"
+                                                    aria-label="Select row"
+                                            />
+                                        </label>
+                                    </td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Repository name"
+                                    >Repository 2</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Branches">10</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Pull requests">25</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Workspaces">5</td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Last commit"
+                                    >2 days ago</td>
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__action">
+                                        <button
+                                                class="pf-v6-c-menu-toggle pf-m-plain pf-m-small"
+                                                type="button"
+                                                aria-expanded="false"
+                                                aria-label="Menu toggle"
+                                        >
+                      <span class="pf-v6-c-menu-toggle__icon">
+                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                      </span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr
+                                        class="pf-v6-c-table__tr"
+                                        role&#x26;#x3D;&#x26;quot;row&#x26;quot;
+                                        [object
+                                        Object]
+                                >
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__check" aria-label="Check row">
+                                        <label
+                                                class="pf-v6-c-check pf-m-standalone"
+                                                for="table-compact-checkrow-1-check-input"
+                                        >
+                                            <input
+                                                    class="pf-v6-c-check__input"
+                                                    type="checkbox"
+                                                    id="table-compact-checkrow-1-check-input-second-three"
+                                                    name="table-compact-checkrow-1-check-input"
+                                                    aria-label="Select row"
+                                            />
+                                        </label>
+                                    </td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Repository name"
+                                    >Repository 3</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Branches">10</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Pull requests">25</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Workspaces">5</td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Last commit"
+                                    >2 days ago</td>
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__action">
+                                        <button
+                                                class="pf-v6-c-menu-toggle pf-m-plain pf-m-small"
+                                                type="button"
+                                                aria-expanded="false"
+                                                aria-label="Menu toggle"
+                                        >
+                      <span class="pf-v6-c-menu-toggle__icon">
+                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                      </span>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr
+                                        class="pf-v6-c-table__tr"
+                                        role&#x26;#x3D;&#x26;quot;row&#x26;quot;
+                                        [object
+                                        Object]
+                                >
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__check" aria-label="Check row">
+                                        <label
+                                                class="pf-v6-c-check pf-m-standalone"
+                                                for="table-compact-checkrow-1-check-input"
+                                        >
+                                            <input
+                                                    class="pf-v6-c-check__input"
+                                                    type="checkbox"
+                                                    id="table-compact-checkrow-1-check-input-second-four"
+                                                    name="table-compact-checkrow-1-check-input"
+                                                    aria-label="Select row"
+                                            />
+                                        </label>
+                                    </td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Repository name"
+                                    >Repository 4</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Branches">10</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Pull requests">25</td>
+                                    <td class="pf-v6-c-table__td" role="cell" data-label="Workspaces">5</td>
+                                    <td
+                                            class="pf-v6-c-table__td"
+                                            role="cell"
+                                            data-label="Last commit"
+                                    >2 days ago</td>
+                                    <td class="pf-v6-c-table__td pf-v6-c-table__action">
+                                        <button
+                                                class="pf-v6-c-menu-toggle pf-m-plain pf-m-small"
+                                                type="button"
+                                                aria-expanded="false"
+                                                aria-label="Menu toggle"
+                                        >
+                      <span class="pf-v6-c-menu-toggle__icon">
+                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                      </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pf-v6-l-split__item">
+                    <!-- Dropzone for the SQLite database -->
+                    <div id="dropzone" style="width: 400px; height: 400px; border: 2px dashed #ccc;">
+                        Drag and drop your SQLite .db file here.
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="eql-editor" style="width:800px;height:600px;border:1px solid grey"></div>
-        <div id="hery-editor" style="width:800px;height:600px;border:1px solid grey"></div>
+
 
         <pre id="output"></pre>
         <div id="container"></div>
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.min.js"></script>-->
-       <!-- <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.52.0/min/vs/loader.js"></script>-->
-        <script src="assets/hery.editor.js"></script>
-        <script src="assets/eql.editor.js"></script>
-        <script src="assets/cache.editor.js"></script>
-        <script src="assets/wasm_exec.js"></script>
         <script src="assets/library/node_modules/jquery/dist/jquery.min.js"></script>
         <script src="assets/library/node_modules/jquery-ui/dist/jquery-ui.min.js"></script>
         <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
         <script src="assets/library/node_modules/sql.js/dist/sql-wasm.js"></script>
-
+        <script src="assets/hery.editor.js"></script>
+        <!--<script src="assets/eql.editor.js"></script>-->
+        <script src="assets/cache.editor.js"></script>
+        <script src="assets/wasm_exec.js"></script>
+        <script src="assets/ux.js"></script>
         <script>
             // Initialize Monaco Editor
             /*require.config({ paths: { 'vs': 'assets/library/node_modules/monaco-editor/min/vs' }});
@@ -114,7 +468,7 @@
                 // Ensure Monaco resizes to fill its container
                 editor.layout();
             });*/
-            require.config({ paths: { vs: 'assets/library/node_modules/monaco-editor/min/vs' } });
+            /*require.config({ paths: { vs: 'assets/library/node_modules/monaco-editor/min/vs' } });
             require(['vs/editor/editor.main'], function () {
                 var eqlEditor = monaco.editor.create(document.getElementById('eql-editor'), {
                     value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
@@ -123,6 +477,46 @@
                 var heryEditor = monaco.editor.create(document.getElementById('hery-editor'), {
                     value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
                     language: 'javascript'
+                });
+            });*/
+            // Monaco Editor configuration
+            /*require.config({ paths: { vs: 'assets/library/node_modules/monaco-editor/min/vs' } });
+
+            // Wait for Monaco to be loaded, then initialize editors
+            require(['vs/editor/editor.main'], function() {
+                var eqlEditor = monaco.editor.create(document.getElementById('eql-editor'), {
+                    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true
+                });
+
+                var heryEditor = monaco.editor.create(document.getElementById('hery-editor'), {
+                    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true
+                });
+            });*/
+            require.config({
+                paths: { vs: 'assets/library/node_modules/monaco-editor/min/vs' }
+            });
+
+            require(['vs/editor/editor.main'], function () {
+                // Initialize EQL Monaco editor
+                var eqlEditor = monaco.editor.create(document.getElementById('eql-editor'), {
+                    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true
+                });
+
+                // Initialize HERY Monaco editor
+                var heryEditor = monaco.editor.create(document.getElementById('hery-editor'), {
+                    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+                    language: 'javascript',
+                    theme: 'vs-dark',
+                    automaticLayout: true
                 });
             });
         </script>
