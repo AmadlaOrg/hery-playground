@@ -61,10 +61,7 @@
             <!-- ################################### -->
             <!-- ############# Middle ############## -->
             <!-- ################################### -->
-            <main class="pf-v6-l-stack__item pf-m-fill pf-v6-l-split">
-                <div class="pf-v6-l-split__item pf-m-fill" x-html="currentContent">
-                </div>
-            </main>
+            <main class="pf-v6-l-stack__item pf-m-fill pf-v6-l-split" x-html="currentContent"></main>
 
             <!-- ################################### -->
             <!-- ############## Footer ############## -->
@@ -73,16 +70,18 @@
         </div>
 
         <template id="screen-loader">
-            <div class="pf-v6-l-bullseye">
-                <div class="pf-v6-l-bullseye__item" style="border: none">
-                    <svg
-                            class="pf-v6-c-spinner"
-                            role="progressbar"
-                            viewBox="0 0 100 100"
-                            aria-label="Loading..."
-                    >
-                        <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none" />
-                    </svg>
+            <div class="pf-v6-l-split__item pf-m-fill">
+                <div class="pf-v6-l-bullseye">
+                    <div class="pf-v6-l-bullseye__item" style="border: none">
+                        <svg
+                                class="pf-v6-c-spinner"
+                                role="progressbar"
+                                viewBox="0 0 100 100"
+                                aria-label="Loading..."
+                        >
+                            <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </template>
