@@ -1,3 +1,7 @@
+#root {
+    height: 100vh;
+}
+
 #container {
     height: 400px;
     width: 600px;

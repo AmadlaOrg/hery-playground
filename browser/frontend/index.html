@@ -6,34 +6,15 @@
         <title>🛝 Hery - Playground 🛝</title>
         <link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly.min.css">
         <!--<link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly-addons.css">-->
-        <link rel="stylesheet" href="assets/library/node_modules/jquery-ui/dist/themes/base/jquery-ui.min.css">
+        <!--<link rel="stylesheet" href="assets/library/node_modules/jquery-ui/dist/themes/start/jquery-ui.min.css">-->
         <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
-        <!--<header class="pf-v6-c-masthead" id="basic-masthead">
-            <div class="pf-v6-c-masthead__main">
-                <div class="pf-v6-c-masthead__brand">
-                    <h1>🛝 Hery - Playground 🛝</h1>
-                </div>
-            </div>
-            <div class="pf-v6-c-masthead__content">-->
         <div id="tabs">
-            <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs">
+            <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs" style="height:50px">
                     <h1 class="pf-v6-c-title pf-m-4xl">Hery - Playground 🛝</h1>
-                    <!--<div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
-                        <button
-                                class="pf-v6-c-button pf-m-plain"
-                                type="button"
-                                aria-label="Scroll left"
-                                disabled
-                        >
-                          <span class="pf-v6-c-button__icon">
-                            <i class="fas fa-angle-left" aria-hidden="true"></i>
-                          </span>
-                        </button>
-                    </div>-->
                     <ul class="pf-v6-c-tabs__list" role="tablist">
-                        <li class="pf-v6-c-tabs__item" role="presentation">
+                        <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
                             <a
                                     type="button"
                                     class="pf-v6-c-tabs__link"
@@ -44,7 +25,7 @@
                                 <span class="pf-v6-c-tabs__item-text">EQL - Entity Query Language</span>
                             </a>
                         </li>
-                        <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
+                        <li class="pf-v6-c-tabs__item" role="presentation">
                             <a
                                     type="button"
                                     class="pf-v6-c-tabs__link"
@@ -67,22 +48,7 @@
                             </a>
                         </li>
                     </ul>
-
-                    <!--<div class="pf-v6-c-tabs__scroll-button" aria-hidden="true">
-                        <button
-                                class="pf-v6-c-button pf-m-plain"
-                                type="button"
-                                aria-label="Scroll right"
-                                disabled
-                        >
-      <span class="pf-v6-c-button__icon">
-        <i class="fas fa-angle-right" aria-hidden="true"></i>
-      </span>
-                        </button>
-                    </div>-->
                 </div>
-            <!--</div>
-        </header>-->
 
             <div class="pf-v6-l-split pf-m-gutter">
                 <div class="pf-v6-l-split__item pf-m-fill">
@@ -91,7 +57,7 @@
                     <!-- ################################### -->
                     <div id="tabs-eql">
                         <h2 class="pf-v6-c-title pf-m-h2">EQL - Entity Query Language</h2>
-                        <div id="eql-editor" style="width:100%;height:600px;border:1px solid grey"></div>
+                        <div id="eql-editor" style="width:100%;height:calc(100vh - 76px);border-right:1px solid grey;border-top:1px solid grey;"></div>
                     </div>
 
                     <!-- ################################### -->
@@ -99,7 +65,7 @@
                     <!-- ################################### -->
                     <div id="tabs-hery-file">
                         <h2 class="pf-v6-c-title pf-m-h2">HERY file</h2>
-                        <div id="hery-editor" style="width:100%;height:600px;border:1px solid grey"></div>
+                        <div id="hery-editor" style="width:100%;height:600px;border-right:1px solid grey"></div>
                     </div>
 
                     <!-- ################################### -->
@@ -452,9 +418,9 @@
                 <!-- ############# Output ############## -->
                 <!-- ################################### -->
                 <div class="pf-v6-l-split__item">
-                    <div id="output-editor" style="width:800px;height:600px;border:1px solid grey"></div>
-                    <pre id="output"></pre>
-                    <div id="container"></div>
+                    <div id="output-editor" style="width:800px;height:calc(100vh - 50px);border-left:1px solid grey"></div>
+                    <!--<pre id="output"></pre>
+                    <div id="container"></div>-->
                 </div>
             </div>
         </div>

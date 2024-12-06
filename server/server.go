@@ -26,9 +26,12 @@ func (s *SServer) Start() error {
 
 func (s *SServer) router() {
 
+	// env := os.Getenv("GIN_MODE")
+
 	s.serverEngine.Static("/assets", "./browser/frontend/assets")
 
 	s.serverEngine.GET("/", func(c *gin.Context) {
+		c.Header("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate")
 		c.File("./browser/frontend/index.html")
 	})
 
