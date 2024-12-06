@@ -7,49 +7,48 @@
         <link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly.min.css">
         <!--<link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly-addons.css">-->
         <link rel="stylesheet" href="assets/style.css">
+        <style>
+        </style>
     </head>
     <body>
 
-        <div x-data="tabSystem()" class="pf-v6-l-stack">
+        <div class="pf-v6-l-stack">
             <!-- ################################### -->
             <!-- ############## Header ############# -->
             <!-- ################################### -->
             <header class="pf-v6-l-stack__item">
-                <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs">
+                <div class="pf-v6-c-tabs pf-m-box" role="region" id="box-tabs"> <!-- style="height:50px" -->
                     <h1 class="pf-v6-c-title pf-m-4xl">Hery - Playground 🛝</h1>
                     <ul class="pf-v6-c-tabs__list" role="tablist">
-                        <li class="pf-v6-c-tabs__item" :class="{'pf-m-current': activeTab === 'eql'}" role="presentation">
+                        <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
                             <a
-                                type="button"
-                                class="pf-v6-c-tabs__link"
-                                role="tab"
-                                id="box-tabs-eql-link"
-                                href="#tabs-eql"
-                                @click.prevent="setTab('eql')"
+                                    type="button"
+                                    class="pf-v6-c-tabs__link"
+                                    role="tab"
+                                    id="box-tabs-eql-link"
+                                    href="#tabs-eql"
                             >
                                 <span class="pf-v6-c-tabs__item-text">EQL - Entity Query Language</span>
                             </a>
                         </li>
-                        <li class="pf-v6-c-tabs__item" :class="{'pf-m-current': activeTab === 'hery-file'}" role="presentation">
+                        <li class="pf-v6-c-tabs__item" role="presentation">
                             <a
-                                type="button"
-                                class="pf-v6-c-tabs__link"
-                                role="tab"
-                                id="box-tabs-hery-file-link"
-                                href="#tabs-hery-file"
-                                @click.prevent="setTab('hery-file')"
+                                    type="button"
+                                    class="pf-v6-c-tabs__link"
+                                    role="tab"
+                                    id="box-tabs-hery-file-link"
+                                    href="#tabs-hery-file"
                             >
                                 <span class="pf-v6-c-tabs__item-text">HERY file</span>
                             </a>
                         </li>
-                        <li class="pf-v6-c-tabs__item" :class="{'pf-m-current': activeTab === 'cache'}" role="presentation">
+                        <li class="pf-v6-c-tabs__item" role="presentation">
                             <a
-                                type="button"
-                                class="pf-v6-c-tabs__link"
-                                role="tab"
-                                id="box-tabs-cache-link"
-                                href="#tabs-cache"
-                                @click.prevent="setTab('cache')"
+                                    type="button"
+                                    class="pf-v6-c-tabs__link"
+                                    role="tab"
+                                    id="box-tabs-cache-link"
+                                    href="#tabs-cache"
                             >
                                 <span class="pf-v6-c-tabs__item-text">Cache</span>
                             </a>
@@ -62,7 +61,19 @@
             <!-- ############# Middle ############## -->
             <!-- ################################### -->
             <main class="pf-v6-l-stack__item pf-m-fill pf-v6-l-split">
-                <div class="pf-v6-l-split__item pf-m-fill" x-html="currentContent">
+                <div class="pf-v6-l-split__item pf-m-fill">
+                    <div class="pf-v6-l-bullseye">
+                        <div class="pf-v6-l-bullseye__item" style="border: none">
+                            <svg
+                                    class="pf-v6-c-spinner"
+                                    role="progressbar"
+                                    viewBox="0 0 100 100"
+                                    aria-label="Loading..."
+                            >
+                                <circle class="pf-v6-c-spinner__path" cx="50" cy="50" r="45" fill="none" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </main>
 
@@ -93,7 +104,7 @@
             <div class="pf-v6-l-split__item">content</div>
         </template>
 
-        <template id="tab-hery-file-editor">
+        <template id="tab-hery-editor">
             <div class="pf-v6-l-split__item">content</div>
             <div class="pf-v6-l-split__item pf-m-fill">HERY</div>
             <div class="pf-v6-l-split__item">content</div>
@@ -105,41 +116,13 @@
             <div class="pf-v6-l-split__item">content</div>
         </template>
 
-        <!--<script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
+        <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
         <script src="assets/library/node_modules/sql.js/dist/sql-wasm.js"></script>
-        <script src="assets/hery.editor.js"></script>-->
+        <script src="assets/hery.editor.js"></script>
         <!--<script src="assets/eql.editor.js"></script>-->
-        <!--<script src="assets/cache.editor.js"></script>
+        <script src="assets/cache.editor.js"></script>
         <script src="assets/wasm_exec.js"></script>
         <script src="assets/ux.js"></script>
-        <script src="assets/editor.js"></script>-->
-        <script>
-            function tabSystem() {
-                return {
-                    activeTab: 'eql', // Default tab
-                    currentContent: '',
-
-                    init() {
-                        // Show spinner initially
-                        this.currentContent = document.getElementById('screen-loader').innerHTML;
-
-                        // Simulate loading delay
-                        setTimeout(() => {
-                            this.setTab(this.activeTab);
-                        }, 2000); // Adjust delay as necessary
-                    },
-
-                    setTab(tab) {
-                        this.activeTab = tab;
-                        const templateId = `tab-${tab}-editor`;
-                        const template = document.getElementById(templateId);
-
-                        this.currentContent = template ? template.innerHTML : '<p>Content not found!</p>';
-                    }
-                };
-            }
-        </script>
-
-        <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
+        <script src="assets/editor.js"></script>
     </body>
 </html>

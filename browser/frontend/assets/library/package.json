@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@patternfly/patternfly": "^6.0.0",
+    "alpinejs": "^3.14.7",
+    "htmx.org": "^1.9.12",
     "jquery": "^4.0.0-beta.2",
     "jquery-ui": "^1.14.1",
     "monaco-editor": "^0.52.0",
