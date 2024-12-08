@@ -103,7 +103,7 @@
             <!-- ################################### -->
             <!-- ############# Middle ############## -->
             <!-- ################################### -->
-            <main class="pf-v6-l-stack__item pf-m-fill pf-v6-l-split">
+            <main class="pf-v6-l-stack__item pf-m-fill pf-v6-l-split" x-data="filesTabs()">
                 <!--<div class="pf-v6-l-split__item pf-m-fill main-spinner">
                     <div class="pf-v6-l-bullseye">
                         <div class="pf-v6-l-bullseye__item" style="border: none">
@@ -122,36 +122,30 @@
                 <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'hery'}">
                     <div class="pf-v6-c-tabs pf-m-vertical" role="region" id="vertical-tabs-hery">
                         <ul class="pf-v6-c-tabs__list" role="tablist">
-                            <li class="pf-v6-c-tabs__item" role="presentation">
-                                <button
-                                        type="button"
-                                        class="pf-v6-c-tabs__link"
-                                        role="tab"
-                                        id="vertical-tabs-hery-link"
-                                >
-                                    <span class="pf-v6-c-tabs__item-text">Users</span>
-                                </button>
-                            </li>
-                            <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
-                                <button
-                                        type="button"
-                                        class="pf-v6-c-tabs__link"
-                                        role="tab"
-                                        id="vertical-tabs-hery-two-link"
-                                >
-                                    <span class="pf-v6-c-tabs__item-text">Containers</span>
-                                </button>
-                            </li>
-                            <li class="pf-v6-c-tabs__item" role="presentation">
-                                <button
-                                        type="button"
-                                        class="pf-v6-c-tabs__link"
-                                        role="tab"
-                                        id="vertical-tabs-hery-three-link"
-                                >
-                                    <span class="pf-v6-c-tabs__item-text">Database</span>
-                                </button>
-                            </li>
+                            <!--<template x-for="file in files" :key="file.id">
+                                <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
+                                    <button
+                                            type="button"
+                                            class="pf-v6-c-tabs__link"
+                                            role="tab"
+                                            :id="'hery-file-' + file.cleanName"
+                                    >
+                                        <span class="pf-v6-c-tabs__item-text" x-text="file.name"></span>
+                                    </button>
+                                </li>
+                            </template>-->
+                            <template x-for="file in files" :key="file.id">
+                                <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
+                                    <button
+                                            type="button"
+                                            class="pf-v6-c-tabs__link"
+                                            role="tab"
+                                            :id="'hery-file-' + file.cleanName"
+                                    >
+                                        <span class="pf-v6-c-tabs__item-text" x-text="file.name"></span>
+                                    </button>
+                                </li>
+                            </template>
                         </ul>
                     </div>
                 </div>
@@ -507,13 +501,15 @@
                                 </div>
                             </div>
                             <div class="pf-v6-c-multiple-file-upload__upload">
-                                <button class="pf-v6-c-button pf-m-secondary" type="button">
+                                <button class="pf-v6-c-button pf-m-secondary" type="button" @click="$refs.fileInput.click()">
                                     <span class="pf-v6-c-button__text">Upload</span>
                                 </button>
+                                <!--<input type="file" x-ref="fileInput" @change="readFile" accept=".yaml,.yml,.hery,.db,.cache" style="display:none">-->
+                                <input type="file" @change="readFile($event)" style="display: none;" x-ref="fileInput" accept=".yaml,.yml,.db,.hery" />
                             </div>
                             <div
                                     class="pf-v6-c-multiple-file-upload__info"
-                            >Accepted file types: HERY, YAML, SQLite 3</div>
+                            >Accepted file types: HERY, YAML, HERY cache file</div>
                         </div>
                     </div>
                 </div>

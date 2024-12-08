@@ -17,13 +17,17 @@ require(['vs/editor/editor.main'], function () {
         automaticLayout: true
     });
 
+    window.eqlEditor = eqlEditor;
+
     // Initialize HERY Monaco editor
     let heryEditor = monaco.editor.create(document.getElementById('hery-editor'), {
-        value: ['_entity: github.com/AmadlaOrg/Entity', '_body:', '\tname: "John Doe"'].join('\n'),
+        //value: ['_entity: github.com/AmadlaOrg/Entity', '_body:', '\tname: "John Doe"'].join('\n'),
         language: 'yaml',
         theme: 'vs', // Default theme
         automaticLayout: true
     });
+
+    window.heryEditor = heryEditor;
 
     // JSON object we want to edit
     const jsonCode = [{
@@ -65,6 +69,62 @@ function theme() {
                 const monacoTheme = this.theme === 'dark' ? 'vs-dark' : 'vs';
                 monaco.editor.setTheme(monacoTheme);
             }
+        }
+    };
+}
+
+/*function filesTabs() {
+    return {
+        files: [],
+        readFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const fileContent = e.target.result;
+                console.log("File content:", fileContent);
+
+
+                const cleanName = file.name.replace(/\./g, '-');
+                this.files.push({
+                    id: Date.now(), // unique ID for x-for key
+                    name: file.name,
+                    cleanName: cleanName,
+                    content: fileContent
+                });
+            };
+            reader.readAsText(file);
+        }
+    };
+}*/
+
+function filesTabs() {
+    return {
+        files: [],
+        readFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const fileContent = e.target.result;
+                const cleanName = file.name.replace(/\./g, '-');
+                this.files.push({
+                    id: Date.now(),
+                    name: file.name,
+                    cleanName: cleanName,
+                    content: fileContent
+                });
+
+                // Set the content into the HERY editor
+                if (window.heryEditor) {
+                    window.heryEditor.setValue(fileContent);
+                } else {
+                    console.warn("HERY editor is not initialized yet.");
+                }
+            };
+            reader.readAsText(file);
         }
     };
 }
