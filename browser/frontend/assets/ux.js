@@ -1,6 +1,6 @@
 function tabSystem() {
     return {
-        activeTab: 'eql', // Default tab
+        activeTab: 'hery', // Default tab
 
         init() {
             this.setTab(this.activeTab);

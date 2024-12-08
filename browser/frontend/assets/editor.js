@@ -48,7 +48,7 @@ require.config({
 require(['vs/editor/editor.main'], function () {
     // Initialize EQL Monaco editor
     let eqlEditor = monaco.editor.create(document.getElementById('eql-editor'), {
-        value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+        value: ['entities.select("_entity")'].join('\n'),
         language: 'javascript',
         //theme: 'vs-dark',
         automaticLayout: true
@@ -56,8 +56,8 @@ require(['vs/editor/editor.main'], function () {
 
     // Initialize HERY Monaco editor
     let heryEditor = monaco.editor.create(document.getElementById('hery-editor'), {
-        value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-        language: 'javascript',
+        value: ['_entity: github.com/AmadlaOrg/Entity', '_body:', '\tname: "John Doe"'].join('\n'),
+        language: 'yaml',
         //theme: 'vs-dark',
         automaticLayout: true
     });
