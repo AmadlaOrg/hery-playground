@@ -101,6 +101,10 @@ function theme() {
 
 function filesTabs() {
     return {
+        activeHeryTab: '',
+        setHeryTab(tab) {
+            this.activeHeryTab = tab;
+        },
         files: [],
         readFile(event) {
             const file = event.target.files[0];
@@ -109,13 +113,15 @@ function filesTabs() {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const fileContent = e.target.result;
-                const cleanName = file.name.replace(/\./g, '-');
+                const cleanName = file.name.replace(/\./g, '-') + this.files.length;
                 this.files.push({
                     id: Date.now(),
                     name: file.name,
                     cleanName: cleanName,
                     content: fileContent
                 });
+
+                this.setHeryTab('hery-file-' + cleanName)
 
                 // Set the content into the HERY editor
                 if (window.heryEditor) {

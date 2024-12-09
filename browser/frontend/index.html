@@ -122,27 +122,19 @@
                 <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'hery'}">
                     <div class="pf-v6-c-tabs pf-m-vertical" role="region" id="vertical-tabs-hery">
                         <ul class="pf-v6-c-tabs__list" role="tablist">
-                            <!--<template x-for="file in files" :key="file.id">
-                                <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
-                                    <button
-                                            type="button"
-                                            class="pf-v6-c-tabs__link"
-                                            role="tab"
-                                            :id="'hery-file-' + file.cleanName"
-                                    >
-                                        <span class="pf-v6-c-tabs__item-text" x-text="file.name"></span>
-                                    </button>
-                                </li>
-                            </template>-->
                             <template x-for="file in files" :key="file.id">
-                                <li class="pf-v6-c-tabs__item pf-m-current" role="presentation">
+                                <li class="pf-v6-c-tabs__item" role="presentation" :class="{'pf-m-current': activeHeryTab === 'hery-file-' + file.cleanName}">
                                     <button
                                             type="button"
                                             class="pf-v6-c-tabs__link"
                                             role="tab"
                                             :id="'hery-file-' + file.cleanName"
+                                            @click.prevent="setHeryTab('hery-file-' + file.cleanName)"
                                     >
-                                        <span class="pf-v6-c-tabs__item-text" x-text="file.name"></span>
+                                        <span
+                                                class="pf-v6-c-tabs__item-text"
+                                                x-text="file.name"
+                                                ></span>
                                     </button>
                                 </li>
                             </template>
