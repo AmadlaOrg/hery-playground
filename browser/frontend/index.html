@@ -55,7 +55,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div style="margin: auto .3em auto auto">
+                    <div style="margin: auto 0 auto auto; padding-right: .3em;">
                         <div class="pf-v6-c-toolbar__content">
                             <div class="pf-v6-c-toolbar__content-section">
                                 <div class="pf-v6-c-toolbar__group pf-m-align-end">
@@ -93,10 +93,61 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="pf-v6-c-toolbar__item" style="margin-left: .3em;">
+                                        <div
+                                                class="pf-v6-c-menu-toggle pf-m-split-button pf-m-action pf-m-expanded"
+                                                id="split-button-checkbox-with-toggle-action-example"
+                                        >
+                                            <button class="pf-v6-c-menu-toggle__button" type="button">Workspace</button>
+                                            <button
+                                                    class="pf-v6-c-menu-toggle__button"
+                                                    type="button"
+                                                    aria-expanded="false"
+                                                    id="split-button-checkbox-with-toggle-action-example-toggle-button"
+                                                    aria-label="Menu toggle"
+                                            >
+    <span class="pf-v6-c-menu-toggle__controls">
+      <span class="pf-v6-c-menu-toggle__toggle-icon">
+        <i class="fas fa-caret-down fa-fw" aria-hidden="true"></i>
+      </span>
+    </span>
+                                            </button>
+
+
+
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+
                                 </div>
+
+
+
                             </div>
+
+
+                            <!-- -->
+
+
+
                         </div>
+
+
+
+
+
                     </div>
+
+
+
+
+
                 </div>
             </header>
 
@@ -143,7 +194,31 @@
                 </div>
 
                 <div class="pf-v6-l-split__item pf-m-fill" :class="{'tab-content': activeTab !== 'hery'}">
-                    <div id="hery-editor" style="width:100%;height:100%;"></div>
+                    <div class="pf-v6-c-empty-state">
+                        <div class="pf-v6-c-empty-state__content">
+                            <div class="pf-v6-c-empty-state__header">
+                                <div class="pf-v6-c-empty-state__icon">
+                                    <i class="fas fa-cubes" aria-hidden="true"></i>
+                                </div>
+                                <div class="pf-v6-c-empty-state__title">
+                                    <h1 class="pf-v6-c-empty-state__title-text">No HERY file</h1>
+                                </div>
+                            </div>
+
+                            <div
+                                    class="pf-v6-c-empty-state__body"
+                            >Create a HERY file. Name it. Start writing.</div>
+
+                            <div class="pf-v6-c-empty-state__footer">
+                                <div class="pf-v6-c-empty-state__actions">
+                                    <button class="pf-v6-c-button pf-m-primary" type="button">
+                                        <span class="pf-v6-c-button__text">Create HERY file</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hery-editor" style="width:100%;height:100%;display:none;"></div>
                 </div>
 
                 <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'cache'}">
@@ -507,7 +582,67 @@
                 </div>
 
                 <div class="pf-v6-l-split__item">
-                    <div id="output-editor" style="width:500px;height:100%;border-left:1px solid grey"></div>
+                    <div class="pf-v6-c-empty-state">
+                        <div class="pf-v6-c-empty-state__content">
+                            <div class="pf-v6-c-empty-state__header">
+                                <div class="pf-v6-c-empty-state__icon">
+                                    <i class="fas fa-cubes" aria-hidden="true"></i>
+                                </div>
+                                <div class="pf-v6-c-empty-state__title">
+                                    <h1 class="pf-v6-c-empty-state__title-text">No Results</h1>
+                                </div>
+                            </div>
+
+                            <div
+                                    class="pf-v6-c-empty-state__body"
+                            >Start querying HERY content.</div>
+                        </div>
+                    </div>
+                    <!--<div class="pf-v6-c-empty-state pf-m-success">
+                        <div class="pf-v6-c-empty-state__content">
+                            <div class="pf-v6-c-empty-state__header">
+                                <div class="pf-v6-c-empty-state__icon">
+                                    <i class="fas fa- fa-check-circle" aria-hidden="true"></i>
+                                </div>
+                                <div class="pf-v6-c-empty-state__title">
+                                    <h1 class="pf-v6-c-empty-state__title-text">You're all set</h1>
+                                </div>
+                            </div>
+
+                            <div
+                                    class="pf-v6-c-empty-state__body"
+                            >This represents an the empty state pattern in PatternFly. Hopefully it's simple enough to use but flexible enough to meet a variety of needs.</div>
+
+                            <div class="pf-v6-c-empty-state__footer">
+                                <div class="pf-v6-c-empty-state__actions">
+                                    <button class="pf-v6-c-button pf-m-primary" type="button">
+                                        <span class="pf-v6-c-button__text">Primary action</span>
+                                    </button>
+                                </div>
+                                <div class="pf-v6-c-empty-state__actions">
+                                    <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <span class="pf-v6-c-button__text">Multiple</span>
+                                    </button>
+                                    <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <span class="pf-v6-c-button__text">Action buttons</span>
+                                    </button>
+                                    <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <span class="pf-v6-c-button__text">Can</span>
+                                    </button>
+                                    <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <span class="pf-v6-c-button__text">Go here</span>
+                                    </button>
+                                    <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <span class="pf-v6-c-button__text">In the second</span>
+                                    </button>
+                                    <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <span class="pf-v6-c-button__text">Action area</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div id="output-editor" style="width:500px;height:100%;border-left:1px solid grey;display:none;"></div>
                 </div>
             </main>
 
@@ -535,5 +670,136 @@
         <script src="assets/ux.js"></script>
         <script src="assets/editor.js"></script>
         <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
+
+        <div class="pf-v6-c-backdrop">
+            <div class="pf-v6-l-bullseye">
+
+                <!--
+                style="position: absolute; inset: 0px auto auto 0px; transform: translate(200px, 50px); z-index: 9999; opacity: 1; transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11);"
+                -->
+
+                <div
+                        class="pf-v6-c-modal-box pf-m-sm"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-sm-title"
+                        aria-describedby="modal-sm-description"
+                >
+                    <div class="pf-v6-c-modal-box__close">
+                        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close">
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </div>
+                    <header class="pf-v6-c-modal-box__header">
+                        <div class="pf-v6-c-modal-box__header-main">
+                            <h1 class="pf-v6-c-modal-box__title" id="modal-sm-title">Modal title</h1>
+                        </div>
+                    </header>
+                    <div class="pf-v6-c-modal-box__body" id="modal-sm-description">
+                        Static text describing modal purpose. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </div>
+                    <footer class="pf-v6-c-modal-box__footer">Modal footer</footer>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="pf-v6-c-menu pf-m-scrollable" style="position: absolute; inset: 0px auto auto 0px; transform: translate(2308px, 50px); width: 246px; z-index: 9999; opacity: 1; transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11);">
+            <div class="pf-v6-c-menu__search">
+                <div class="pf-v6-c-menu__search-input">
+                    <div class="pf-v6-c-text-input-group">
+                        <div class="pf-v6-c-text-input-group__main pf-m-icon">
+          <span class="pf-v6-c-text-input-group__text">
+            <span class="pf-v6-c-text-input-group__icon">
+              <i class="fas fa-fw fa-search"></i>
+            </span>
+            <input
+                    class="pf-v6-c-text-input-group__text-input"
+                    type="text"
+                    placeholder="Search"
+                    value
+                    aria-label="Search input"
+            />
+          </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="pf-v6-c-divider" />
+            <div class="pf-v6-c-menu__content">
+                <ul class="pf-v6-c-menu__list" role="menu">
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 1</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 2</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 3</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 4</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 5</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 6</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 7</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 8</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 9</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 10</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 11</span>
+                        </button>
+                    </li>
+                    <li class="pf-v6-c-menu__list-item" role="none">
+                        <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                            <span class="pf-v6-c-menu__item-text">Action 12</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="pf-v6-c-menu__footer">
+                <button class="pf-v6-c-button pf-m-control pf-m-inline" type="button">
+                    <span class="pf-v6-c-button__text">Create Workspace</span>
+                </button>
+            </div>
+        </div>
     </body>
 </html>
