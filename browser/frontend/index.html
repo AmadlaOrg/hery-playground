@@ -661,22 +661,15 @@
             Drag and drop your SQLite .db file here.
         </div>-->
 
-        <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
-        <script src="assets/library/node_modules/sql.js/dist/sql-wasm.js"></script>
-        <script src="assets/hery.editor.js"></script>
-        <!--<script src="assets/eql.editor.js"></script>-->
-        <!--<script src="assets/cache.editor.js"></script>-->
-        <script src="assets/wasm_exec.js"></script>
-        <script src="assets/ux.js"></script>
-        <script src="assets/editor.js"></script>
-        <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
 
-        <div class="pf-v6-c-backdrop">
+        <!--
+               style="position: absolute; inset: 0px auto auto 0px; transform: translate(200px, 50px); z-index: 9999; opacity: 1; transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11);"
+               -->
+
+        <!--<div class="pf-v6-c-backdrop">
             <div class="pf-v6-l-bullseye">
 
-                <!--
-                style="position: absolute; inset: 0px auto auto 0px; transform: translate(200px, 50px); z-index: 9999; opacity: 1; transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11);"
-                -->
+
 
                 <div
                         class="pf-v6-c-modal-box pf-m-sm"
@@ -706,6 +699,46 @@
                     <footer class="pf-v6-c-modal-box__footer">Modal footer</footer>
                 </div>
 
+            </div>
+        </div>-->
+
+        <div class="pf-v6-c-backdrop">
+            <div class="pf-v6-l-bullseye">
+                <div class="pf-v6-c-modal-box pf-m-lg" role="dialog" aria-modal="true" aria-labelledby="about-modal-title">
+                    <div class="pf-v6-c-about-modal-box">
+                        <div class="pf-v6-c-about-modal-box__brand" style="font-size: xxx-large">
+                            🛝
+                        </div>
+                        <div class="pf-v6-c-about-modal-box__close">
+                            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close dialog">
+                                <span class="pf-v6-c-button__icon">
+                                  <i class="fas fa-times" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="pf-v6-c-about-modal-box__header">
+                            <h1 class="pf-v6-c-title pf-m-4xl" id="about-modal-title">HERY - Playground 🛝</h1>
+                        </div>
+                        <div class="pf-v6-c-about-modal-box__content">
+                            <div class="pf-v6-c-content">
+                                <dl x-data="featureCheck()">
+                                    <dt>Version</dt>
+                                    <dd>v1.0.0</dd>
+
+                                    <dt>WASM support:</dt>
+                                    <dd x-text="wasmSupported ? '✅' : '❌'"></dd>
+
+                                    <dt>File API support:</dt>
+                                    <dd x-text="fileApiSupported ? '✅' : '❌'"></dd>
+
+                                    <dt>Fetch support:</dt>
+                                    <dd x-text="fetchSupported ? '✅' : '❌'"></dd>
+                                </dl>
+                            </div>
+                            <p class="pf-v6-c-about-modal-box__strapline">&copy; Amadla 🐰</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -801,5 +834,16 @@
                 </button>
             </div>
         </div>
+
+        <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
+        <script src="assets/library/node_modules/sql.js/dist/sql-wasm.js"></script>
+        <script src="assets/hery.editor.js"></script>
+        <!--<script src="assets/eql.editor.js"></script>-->
+        <!--<script src="assets/cache.editor.js"></script>-->
+        <script src="assets/wasm_exec.js"></script>
+        <script src="assets/ux.js"></script>
+        <script src="assets/editor.js"></script>
+        <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
+
     </body>
 </html>

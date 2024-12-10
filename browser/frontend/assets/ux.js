@@ -12,6 +12,14 @@ function tabSystem() {
     };
 }
 
+function featureCheck() {
+    return {
+        wasmSupported: (typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function"),
+        fileApiSupported: (typeof File !== 'undefined' && typeof FileReader !== 'undefined' && typeof Blob !== 'undefined'),
+        fetchSupported: (typeof fetch === 'function')
+    }
+}
+
 /*function readFile(event) {
     console.log("readFile")
     const file = event.target.files[0];
