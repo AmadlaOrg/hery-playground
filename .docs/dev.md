@@ -12,6 +12,13 @@ This is why the only two libraries used are:
 - [sql.js](https://github.com/sql-js/sql.js/)
 
 ## QA
+In the `.script/qa-container.sh` there are functions that can be called with `make` command to work with [Playwright](https://playwright.dev/).
+
+Here is a list of the commands:
+- `make qa-test` - Run [Playwright](https://playwright.dev/) test
+- `make qa-test-show-report` - To get the report
+- `make qa-test-ui` - Run [Playwright](https://playwright.dev/) test UI
+
 ### Functional Testing
 This project uses [Playwright](https://playwright.dev/) to do the functional testing. This is to ensure that the all the pieces work together.
 
