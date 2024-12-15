@@ -1,3 +1,13 @@
+/**
+ * All about the different components inside the page that are not related to Monaco editor.
+ *
+ * Some of the components need to have access to the Monaco editor elements so they are in the editor.js file.
+ */
+
+/**
+ *
+ * @returns {{init(): void, setTab(*): void, activeTab: string}}
+ */
 function tabSystem() {
     return {
         activeTab: 'hery', // Default tab
@@ -12,12 +22,40 @@ function tabSystem() {
     };
 }
 
+/**
+ *
+ * @returns {{wasmSupported: boolean, fileApiSupported: boolean, fetchSupported: boolean}}
+ */
 function featureCheck() {
     return {
         wasmSupported: (typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function"),
         fileApiSupported: (typeof File !== 'undefined' && typeof FileReader !== 'undefined' && typeof Blob !== 'undefined'),
         fetchSupported: (typeof fetch === 'function')
     }
+}
+
+/**
+ *
+ * @returns {{init(): void, setInfoModal(*): void, infoModalShow: boolean}}
+ */
+function page() {
+    return {
+        infoModalShow: false,
+        settingsModalShow: false,
+
+        init() {
+            this.setInfoModal(this.infoModal)
+            this.setSettingsModal(this.settingsModalShow)
+        },
+
+        setInfoModal(status) {
+            this.infoModal = status;
+        },
+
+        setSettingsModal(status) {
+            this.settingsModalShow = status;
+        },
+    };
 }
 
 /*function readFile(event) {

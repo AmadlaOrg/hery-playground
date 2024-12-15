@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly-addons.css">
         <link rel="stylesheet" href="assets/style.css">
     </head>
-    <body>
+    <body x-data="page">
 
         <div x-data="tabSystem()" class="pf-v6-l-stack">
             <!-- ################################### -->
@@ -59,6 +59,20 @@
                         <div class="pf-v6-c-toolbar__content">
                             <div class="pf-v6-c-toolbar__content-section">
                                 <div class="pf-v6-c-toolbar__group pf-m-align-end">
+                                    <div class="pf-v6-c-toolbar__item" style="margin-right: .3em;">
+                                        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Settings" @click="settingsModalShow = true">
+                                          <span class="pf-v6-c-button__icon">
+                                            <i class="fas fa-cog" aria-hidden="true"></i>
+                                          </span>
+                                        </button>
+                                    </div>
+                                    <div class="pf-v6-c-toolbar__item" style="margin-right: .3em;">
+                                        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Info" @click="infoModalShow = true">
+                                          <span class="pf-v6-c-button__icon">
+                                            <i class="fas fa-info-circle" aria-hidden="true"></i>
+                                          </span>
+                                        </button>
+                                    </div>
                                     <div class="pf-v6-c-toolbar__item">
                                         <div class="pf-v6-c-toggle-group" role="group" aria-label="Dark theme toggle group">
                                             <div class="pf-v6-c-toggle-group__item">
@@ -170,7 +184,7 @@
                     </div>
                 </div>-->
 
-                <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'hery'}">
+                <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'hery'}" id="tab-right-side-menu-hery">
                     <div class="pf-v6-c-tabs pf-m-vertical" role="region" id="vertical-tabs-hery">
                         <ul class="pf-v6-c-tabs__list" role="tablist">
                             <template x-for="file in files" :key="file.id">
@@ -193,7 +207,7 @@
                     </div>
                 </div>
 
-                <div class="pf-v6-l-split__item pf-m-fill" :class="{'tab-content': activeTab !== 'hery'}">
+                <div class="pf-v6-l-split__item pf-m-fill" :class="{'tab-content': activeTab !== 'hery'}" id="tab-content-hery">
                     <div class="pf-v6-c-empty-state">
                         <div class="pf-v6-c-empty-state__content">
                             <div class="pf-v6-c-empty-state__header">
@@ -221,7 +235,7 @@
                     <div id="hery-editor" style="width:100%;height:100%;display:none;"></div>
                 </div>
 
-                <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'cache'}">
+                <div class="pf-v6-l-split__item" :class="{'tab-content': activeTab !== 'cache'}" id="tab-right-side-menu-cache">
                     <div class="pf-v6-c-tabs pf-m-vertical" role="region" id="vertical-tabs-cache">
                         <ul class="pf-v6-c-tabs__list" role="tablist">
                             <li class="pf-v6-c-tabs__item" role="presentation">
@@ -258,7 +272,7 @@
                     </div>
                 </div>
 
-                <div class="pf-v6-l-split__item pf-m-fill" :class="{'tab-content': activeTab !== 'cache'}">
+                <div class="pf-v6-l-split__item pf-m-fill" :class="{'tab-content': activeTab !== 'cache'}" id="tab-content-cache">
                     <table
                             class="pf-v6-c-table pf-m-grid-lg"
                             role="grid"
@@ -555,7 +569,7 @@
                     </table>
                 </div>
 
-                <div class="pf-v6-l-split__item pf-m-fill pf-v6-u-p-xl" :class="{'tab-content': activeTab !== 'upload'}">
+                <div class="pf-v6-l-split__item pf-m-fill pf-v6-u-p-xl" :class="{'tab-content': activeTab !== 'upload'}" id="tab-content-upload">
                     <div class="pf-v6-c-multiple-file-upload pf-m-drag-over" id="dropzone">
                         <div class="pf-v6-c-multiple-file-upload__main">
                             <div class="pf-v6-c-multiple-file-upload__title">
@@ -646,8 +660,42 @@
                 </div>
             </main>
 
-            <div class="pf-v6-l-stack__item" style="height:60px;border-top:1px solid grey;">
-                <div id="eql-editor" style="width:100%;height:100%;"></div>
+            <div class="pf-v6-l-stack__item" style="height:10em;border-top:1px solid grey;" id="component-eql">
+                <div class="pf-v6-l-split">
+                    <div class="pf-v6-l-split__item pf-m-fill">
+                        <div class="pf-v6-l-stack">
+                            <div class="pf-v6-l-stack__item" style="height: 5em;">
+                                <div id="eql-editor" style="width:100%;height:100%;"></div>
+                            </div>
+                            <!--<div class="pf-v6-l-stack__item pf-m-fill">pf-m-fill</div>-->
+                            <div class="pf-v6-l-stack__item" style="height: 5em; border-top:1px solid grey;">
+                                Result...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pf-v6-l-split__item" style="border-left:1px solid grey; border-right:1px solid grey;">
+                        <!-- fa-pause or fa-times -->
+                        <!-- fa-play -->
+                        <button
+                                class="pf-v6-c-button pf-m-small pf-m-plain"
+                                type="button"
+                                aria-label="Remove"
+                        >
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-play" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </div>
+                    <div class="pf-v6-l-split__item">
+                        <ul class="pf-v6-c-list pf-m-plain pf-m-bordered" role="list" style="display: block; overflow: auto; max-height: 10em;">
+                            <li>Donec blandit a lorem id convallis.</li>
+                            <li>Integer in volutpat libero.</li>
+                            <li>Donec a diam tellus.</li>
+                            <li>Aenean nec tortor orci.</li>
+                            <li>Vivamus maximus ultricies pulvinar.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- ################################### -->
@@ -702,7 +750,64 @@
             </div>
         </div>-->
 
-        <div class="pf-v6-c-backdrop">
+        <div class="pf-v6-c-backdrop" x-show="settingsModalShow" x-transition>
+            <div class="pf-v6-l-bullseye">
+                <div
+                        class="pf-v6-c-modal-box pf-m-sm"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-lg-title"
+                        aria-describedby="modal-lg-description"
+                >
+                    <div class="pf-v6-c-modal-box__close">
+                        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="settingsModalShow = ! settingsModalShow">
+              <span class="pf-v6-c-button__icon">
+                <i class="fas fa-times" aria-hidden="true"></i>
+              </span>
+                        </button>
+                    </div>
+                    <header class="pf-v6-c-modal-box__header">
+                        <div class="pf-v6-c-modal-box__header-main">
+                            <h2 class="pf-v6-c-modal-box__title pf-m-icon" id="modal-lg-title">
+                                <span class="pf-v6-c-modal-box__title-icon">
+                                  <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
+                                </span>
+                                <span class="pf-v6-c-modal-box__title-text">
+                                Settings
+                                </span>
+                            </h2>
+                        </div>
+                    </header>
+                    <div class="pf-v6-c-modal-box__body" id="modal-lg-description">
+
+                        <label class="pf-v6-c-switch" for="switch-label-check-1">
+                            <input
+                                    class="pf-v6-c-switch__input"
+                                    type="checkbox"
+                                    role="switch"
+                                    id="switch-label-check-1"
+                                    aria-labelledby="switch-label-check-1-text"
+                                    checked
+                            />
+
+                            <span class="pf-v6-c-switch__toggle">
+            <span class="pf-v6-c-switch__toggle-icon">
+              <i class="fas fa-check" aria-hidden="true"></i>
+            </span>
+          </span>
+                            <span
+                                    class="pf-v6-c-switch__label pf-m-on"
+                                    id="switch-label-check-1-text"
+                                    aria-hidden="true"
+                            >Connect to server</span>
+                        </label>
+                    </div>
+                    <footer class="pf-v6-c-modal-box__footer">Modal footer</footer>
+                </div>
+            </div>
+        </div>
+
+        <div class="pf-v6-c-backdrop" x-show="infoModalShow" x-transition>
             <div class="pf-v6-l-bullseye">
                 <div class="pf-v6-c-modal-box pf-m-lg" role="dialog" aria-modal="true" aria-labelledby="about-modal-title">
                     <div class="pf-v6-c-about-modal-box">
@@ -710,7 +815,7 @@
                             🛝
                         </div>
                         <div class="pf-v6-c-about-modal-box__close">
-                            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close dialog">
+                            <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close dialog" @click="infoModalShow = ! infoModalShow">
                                 <span class="pf-v6-c-button__icon">
                                   <i class="fas fa-times" aria-hidden="true"></i>
                                 </span>
@@ -844,6 +949,11 @@
         <script src="assets/ux.js"></script>
         <script src="assets/editor.js"></script>
         <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
-
+        <script src="assets/library/node_modules/@alpinejs/anchor/dist/cdn.min.js"></script>
+        <script src="assets/library/node_modules/@alpinejs/collapse/dist/cdn.min.js"></script>
+        <script src="assets/library/node_modules/@alpinejs/focus/dist/cdn.min.js"></script>
+        <script src="assets/library/node_modules/@alpinejs/morph/dist/cdn.min.js"></script>
+        <script src="assets/library/node_modules/@alpinejs/persist/dist/cdn.min.js"></script>
+        <script src="assets/library/node_modules/@alpinejs/resize/dist/cdn.min.js"></script>
     </body>
 </html>
