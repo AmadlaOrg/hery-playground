@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/AmadlaOrg/hery-playground/server/controller"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 type IServer interface {
@@ -44,4 +45,8 @@ func (s *SServer) router() {
 			"message": "Collection: " + collectionName,
 		})
 	})
+}
+
+func (s *SServer) openConfig() {
+	viper.SetConfigName("config")
 }
