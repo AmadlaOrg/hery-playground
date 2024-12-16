@@ -42,10 +42,12 @@ function page() {
     return {
         infoModalShow: false,
         settingsModalShow: false,
+        newWorkspaceModalShow: false,
 
         init() {
             this.setInfoModal(this.infoModal)
             this.setSettingsModal(this.settingsModalShow)
+            this.setNewWorkspaceModalShow(this.newWorkspaceModalShow)
         },
 
         setInfoModal(status) {
@@ -54,6 +56,10 @@ function page() {
 
         setSettingsModal(status) {
             this.settingsModalShow = status;
+        },
+
+        setNewWorkspaceModalShow(status) {
+            this.newWorkspaceModalShow = status
         },
     };
 }

@@ -120,11 +120,11 @@
                                                     id="split-button-checkbox-with-toggle-action-example-toggle-button"
                                                     aria-label="Menu toggle"
                                             >
-    <span class="pf-v6-c-menu-toggle__controls">
-      <span class="pf-v6-c-menu-toggle__toggle-icon">
-        <i class="fas fa-caret-down fa-fw" aria-hidden="true"></i>
-      </span>
-    </span>
+                                                <span class="pf-v6-c-menu-toggle__controls">
+                                                  <span class="pf-v6-c-menu-toggle__toggle-icon">
+                                                    <i class="fas fa-caret-down fa-fw" aria-hidden="true"></i>
+                                                  </span>
+                                                </span>
                                             </button>
 
 
@@ -225,7 +225,10 @@
 
                             <div class="pf-v6-c-empty-state__footer">
                                 <div class="pf-v6-c-empty-state__actions">
-                                    <button class="pf-v6-c-button pf-m-primary" type="button">
+                                    <button
+                                            class="pf-v6-c-button pf-m-primary"
+                                            type="button"
+                                            @click="newWorkspaceModalShow = true">
                                         <span class="pf-v6-c-button__text">Create Workspace</span>
                                     </button>
                                 </div>
@@ -607,9 +610,7 @@
                                 </div>
                             </div>
 
-                            <div
-                                    class="pf-v6-c-empty-state__body"
-                            >Start querying HERY content.</div>
+                            <div class="pf-v6-c-empty-state__body"></div>
                         </div>
                     </div>
                     <!--<div class="pf-v6-c-empty-state pf-m-success">
@@ -860,7 +861,7 @@
             </div>
         </div>
 
-        <div class="pf-v6-c-backdrop">
+        <div class="pf-v6-c-backdrop" x-show="newWorkspaceModalShow" x-transition>
             <div class="pf-v6-l-bullseye">
                 <div
                         class="pf-v6-c-modal-box pf-m-sm"
@@ -870,7 +871,11 @@
                         aria-describedby="modal-sm-description"
                 >
                     <div class="pf-v6-c-modal-box__close">
-                        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close">
+                        <button
+                                class="pf-v6-c-button pf-m-plain"
+                                type="button"
+                                aria-label="Close"
+                                @click="newWorkspaceModalShow = ! newWorkspaceModalShow">
                           <span class="pf-v6-c-button__icon">
                             <i class="fas fa-times" aria-hidden="true"></i>
                           </span>
@@ -891,7 +896,7 @@
                                     <label class="pf-v6-c-form__label" for="-workspace-name">
                                     <span class="pf-v6-c-form__label-text">Workspace Name</span>&nbsp;<span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span></label>
                                 </div>
-                                <div class="pf-v6-c-form__group-control">
+                                <div class="pf-v6-c-form__group-control" x-data="{ maxLength: 64, inputValue: '' }">
                                       <span class="pf-v6-c-form-control pf-m-required">
                                         <input
                                                 required
@@ -899,9 +904,13 @@
                                                 id="-workspace-name"
                                                 name="-workspace-name"
                                                 aria-describedby="-workspace-name-helper"
+                                                :maxlength="maxLength"
+                                                x-model="inputValue"
                                         />
                                       </span>
-
+                                    <small id="char-count">
+                                        <span x-text="maxLength - inputValue.length"></span> characters remaining
+                                    </small>
                                 </div>
                             </div>
                             <div
@@ -945,7 +954,10 @@
                                         <button class="pf-v6-c-button pf-m-primary" type="submit">
                                             <span class="pf-v6-c-button__text">Submit</span>
                                         </button>
-                                        <button class="pf-v6-c-button pf-m-link" type="button">
+                                        <button
+                                                class="pf-v6-c-button pf-m-link"
+                                                type="button"
+                                                @click="newWorkspaceModalShow = ! newWorkspaceModalShow">
                                             <span class="pf-v6-c-button__text">Cancel</span>
                                         </button>
                                     </div>
@@ -1046,7 +1058,10 @@
                 </ul>
             </div>
             <div class="pf-v6-c-menu__footer">
-                <button class="pf-v6-c-button pf-m-control pf-m-inline" type="button">
+                <button
+                        class="pf-v6-c-button pf-m-control pf-m-inline"
+                        type="button"
+                        @click="newWorkspaceModalShow = true">
                     <span class="pf-v6-c-button__text">Create Workspace</span>
                 </button>
                 <button class="pf-v6-c-button pf-m-control pf-m-inline" type="button">
