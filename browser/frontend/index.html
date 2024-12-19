@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly-addons.css">
         <link rel="stylesheet" href="assets/style.css">
     </head>
-    <body x-data="page">
+    <body x-data="page" x-data="{ width: 0, height: 0 }" x-resize.document="width = $width; height = $height">
 
         <div x-data="tabSystem()" class="pf-v6-l-stack">
             <!-- ################################### -->
@@ -231,6 +231,16 @@
                                             @click="newWorkspaceModalShow = true">
                                         <span class="pf-v6-c-button__text">Create Workspace</span>
                                     </button>
+                                </div>
+                                <div>
+                                    <i>Resize your browser window to see the document width and height values change.</i>
+                                    <br><br>
+                                    <p x-text="'Width: ' + width + 'px'">Width: 2558px</p>
+                                    <p x-text="'Height: ' + height + 'px'">Height: 2449.5px</p>
+                                </div>
+                                <div x-data="{ count: $persist(0) }">
+                                    <button :click="count++">Increment</button>
+                                    <span x-text="count"></span>
                                 </div>
                             </div>
                         </div>
@@ -936,10 +946,10 @@
                                         />
 
                                         <span class="pf-v6-c-switch__toggle">
-    <span class="pf-v6-c-switch__toggle-icon">
-      <i class="fas fa-check" aria-hidden="true"></i>
-    </span>
-  </span>
+                                            <span class="pf-v6-c-switch__toggle-icon">
+                                              <i class="fas fa-check" aria-hidden="true"></i>
+                                            </span>
+                                          </span>
                                         <span
                                                 class="pf-v6-c-switch__label pf-m-on"
                                                 id="switch-label-check-1-text-2"
@@ -1062,7 +1072,7 @@
                         class="pf-v6-c-button pf-m-control pf-m-inline"
                         type="button"
                         @click="newWorkspaceModalShow = true">
-                    <span class="pf-v6-c-button__text">Create Workspace</span>
+                    <span class="pf-v6-c-button__text">New Workspace</span>
                 </button>
                 <button class="pf-v6-c-button pf-m-control pf-m-inline" type="button">
                     <span class="pf-v6-c-button__text">Edit</span>
@@ -1070,20 +1080,35 @@
             </div>
         </div>
 
-        <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
+        <!----------------------------->
+        <!---------- Scripts ---------->
+        <!----------------------------->
+
+        <!-- SQLite in browser -->
         <script src="assets/library/node_modules/sql.js/dist/sql-wasm.js"></script>
+
+        <!-- WebAssembly - Golang -->
+        <script src="assets/wasm_exec.js"></script>
+
+        <!-- Code Editor Monaco -->
+        <script src="assets/library/node_modules/monaco-editor/min/vs/loader.js"></script>
+
+        <!-- Custom Scripts -->
         <script src="assets/hery.editor.js"></script>
         <!--<script src="assets/eql.editor.js"></script>-->
         <!--<script src="assets/cache.editor.js"></script>-->
-        <script src="assets/wasm_exec.js"></script>
         <script src="assets/ux.js"></script>
         <script src="assets/editor.js"></script>
-        <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
+
+        <!-- Alpine.js plugins -->
         <script src="assets/library/node_modules/@alpinejs/anchor/dist/cdn.min.js"></script>
         <script src="assets/library/node_modules/@alpinejs/collapse/dist/cdn.min.js"></script>
         <script src="assets/library/node_modules/@alpinejs/focus/dist/cdn.min.js"></script>
         <script src="assets/library/node_modules/@alpinejs/morph/dist/cdn.min.js"></script>
         <script src="assets/library/node_modules/@alpinejs/persist/dist/cdn.min.js"></script>
-        <script src="assets/library/node_modules/@alpinejs/resize/dist/cdn.min.js"></script>
+        <script src="assets/library/node_modules/@alpinejs/resize/dist/cdn.js"></script>
+
+        <!-- Alpine.js framework needs to load -AFTER- the plugins -->
+        <script src="assets/library/node_modules/alpinejs/dist/cdn.min.js"></script>
     </body>
 </html>
