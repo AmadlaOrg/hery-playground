@@ -40,9 +40,14 @@ function featureCheck() {
  */
 function page() {
     return {
+        // Modals
         infoModalShow: false,
         settingsModalShow: false,
         newWorkspaceModalShow: false,
+
+        // Document width and height that changes with resizing
+        documentWidth: 0,
+        documentHeight: 0,
 
         init() {
             this.setInfoModal(this.infoModal)

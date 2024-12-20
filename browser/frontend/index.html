@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="assets/library/node_modules/@patternfly/patternfly/patternfly-addons.css">
         <link rel="stylesheet" href="assets/style.css">
     </head>
-    <body x-data="page" x-data="{ width: 0, height: 0 }" x-resize.document="width = $width; height = $height">
+    <body x-data="page" x-resize.document="documentWidth = $width; documentHeight = $height">
 
         <div x-data="tabSystem()" class="pf-v6-l-stack">
             <!-- ################################### -->
@@ -235,8 +235,8 @@
                                 <div>
                                     <i>Resize your browser window to see the document width and height values change.</i>
                                     <br><br>
-                                    <p x-text="'Width: ' + width + 'px'">Width: 2558px</p>
-                                    <p x-text="'Height: ' + height + 'px'">Height: 2449.5px</p>
+                                    <p x-text="'Width: ' + documentWidth + 'px'">Width: 2558px</p>
+                                    <p x-text="'Height: ' + documentHeight + 'px'">Height: 2449.5px</p>
                                 </div>
                                 <div x-data="{ count: $persist(0) }">
                                     <button :click="count++">Increment</button>
@@ -893,7 +893,7 @@
                     </div>
                     <header class="pf-v6-c-modal-box__header">
                         <div class="pf-v6-c-modal-box__header-main">
-                            <h1 class="pf-v6-c-modal-box__title" id="modal-sm-title">New Workspace</h1>
+                            <h2 class="pf-v6-c-modal-box__title" id="modal-sm-title">New Workspace</h2>
                         </div>
                     </header>
                     <div class="pf-v6-c-modal-box__body" id="modal-sm-description">
@@ -986,18 +986,18 @@
                 <div class="pf-v6-c-menu__search-input">
                     <div class="pf-v6-c-text-input-group">
                         <div class="pf-v6-c-text-input-group__main pf-m-icon">
-          <span class="pf-v6-c-text-input-group__text">
-            <span class="pf-v6-c-text-input-group__icon">
-              <i class="fas fa-fw fa-search"></i>
-            </span>
-            <input
-                    class="pf-v6-c-text-input-group__text-input"
-                    type="text"
-                    placeholder="Search"
-                    value
-                    aria-label="Search input"
-            />
-          </span>
+                          <span class="pf-v6-c-text-input-group__text">
+                            <span class="pf-v6-c-text-input-group__icon">
+                              <i class="fas fa-fw fa-search"></i>
+                            </span>
+                            <input
+                                    class="pf-v6-c-text-input-group__text-input"
+                                    type="text"
+                                    placeholder="Search"
+                                    value
+                                    aria-label="Search input"
+                            />
+                          </span>
                         </div>
                     </div>
                 </div>
