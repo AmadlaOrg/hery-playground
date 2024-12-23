@@ -1,0 +1,242 @@
+<!--<div class="pf-v6-c-backdrop">
+            <div class="pf-v6-l-bullseye">
+
+
+
+                <div
+                        class="pf-v6-c-modal-box pf-m-sm"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-sm-title"
+                        aria-describedby="modal-sm-description"
+                >
+                    <div class="pf-v6-c-modal-box__close">
+                        <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close">
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </div>
+                    <header class="pf-v6-c-modal-box__header">
+                        <div class="pf-v6-c-modal-box__header-main">
+                            <h2 class="pf-v6-c-modal-box__title" id="modal-sm-title">Modal title</h2>
+                        </div>
+                    </header>
+                    <div class="pf-v6-c-modal-box__body" id="modal-sm-description">
+                        Static text describing modal purpose. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.
+                    </div>
+                    <footer class="pf-v6-c-modal-box__footer">Modal footer</footer>
+                </div>
+
+            </div>
+        </div>-->
+
+<div class="pf-v6-c-backdrop" x-show="settingsModalShow" x-transition>
+    <div class="pf-v6-l-bullseye">
+        <div
+                class="pf-v6-c-modal-box pf-m-sm"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-lg-title"
+                aria-describedby="modal-lg-description"
+        >
+            <div class="pf-v6-c-modal-box__close">
+                <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close" @click="settingsModalShow = ! settingsModalShow">
+              <span class="pf-v6-c-button__icon">
+                <i class="fas fa-times" aria-hidden="true"></i>
+              </span>
+                </button>
+            </div>
+            <header class="pf-v6-c-modal-box__header">
+                <div class="pf-v6-c-modal-box__header-main">
+                    <h2 class="pf-v6-c-modal-box__title pf-m-icon" id="modal-lg-title">
+                                <span class="pf-v6-c-modal-box__title-icon">
+                                  <i class="fas fa-fw fa-cog" aria-hidden="true"></i>
+                                </span>
+                        <span class="pf-v6-c-modal-box__title-text">
+                                Settings
+                                </span>
+                    </h2>
+                </div>
+            </header>
+            <div class="pf-v6-c-modal-box__body" id="modal-lg-description">
+
+                <label class="pf-v6-c-switch" for="switch-label-check-1">
+                    <input
+                            class="pf-v6-c-switch__input"
+                            type="checkbox"
+                            role="switch"
+                            id="switch-label-check-1"
+                            aria-labelledby="switch-label-check-1-text"
+                            checked
+                    />
+
+                    <span class="pf-v6-c-switch__toggle">
+            <span class="pf-v6-c-switch__toggle-icon">
+              <i class="fas fa-check" aria-hidden="true"></i>
+            </span>
+          </span>
+                    <span
+                            class="pf-v6-c-switch__label pf-m-on"
+                            id="switch-label-check-1-text"
+                            aria-hidden="true"
+                    >Connect to server</span>
+                </label>
+            </div>
+            <footer class="pf-v6-c-modal-box__footer">Modal footer</footer>
+        </div>
+    </div>
+</div>
+
+<div class="pf-v6-c-backdrop" x-show="infoModalShow" x-transition>
+    <div class="pf-v6-l-bullseye">
+        <div class="pf-v6-c-modal-box pf-m-lg" role="dialog" aria-modal="true" aria-labelledby="about-modal-title">
+            <div class="pf-v6-c-about-modal-box">
+                <div class="pf-v6-c-about-modal-box__brand" style="font-size: xxx-large">
+                    🛝
+                </div>
+                <div class="pf-v6-c-about-modal-box__close">
+                    <button class="pf-v6-c-button pf-m-plain" type="button" aria-label="Close dialog" @click="infoModalShow = ! infoModalShow">
+                                <span class="pf-v6-c-button__icon">
+                                  <i class="fas fa-times" aria-hidden="true"></i>
+                                </span>
+                    </button>
+                </div>
+                <div class="pf-v6-c-about-modal-box__header">
+                    <h2 class="pf-v6-c-title pf-m-4xl" id="about-modal-title">HERY - Playground 🛝</h2>
+                </div>
+                <div class="pf-v6-c-about-modal-box__content">
+                    <div class="pf-v6-c-content">
+                        <dl x-data="featureCheck()">
+                            <dt>Version</dt>
+                            <dd>v1.0.0</dd>
+
+                            <dt>WASM support:</dt>
+                            <dd x-text="wasmSupported ? '✅' : '❌'"></dd>
+
+                            <dt>File API support:</dt>
+                            <dd x-text="fileApiSupported ? '✅' : '❌'"></dd>
+
+                            <dt>Fetch support:</dt>
+                            <dd x-text="fetchSupported ? '✅' : '❌'"></dd>
+                        </dl>
+                    </div>
+                    <p class="pf-v6-c-about-modal-box__strapline">&copy; Amadla 🐰</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pf-v6-c-backdrop" x-show="newWorkspaceModalShow" x-transition>
+    <div class="pf-v6-l-bullseye">
+        <div
+                class="pf-v6-c-modal-box pf-m-sm"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-sm-title"
+                aria-describedby="modal-sm-description"
+        >
+            <div class="pf-v6-c-modal-box__close">
+                <button
+                        class="pf-v6-c-button pf-m-plain"
+                        type="button"
+                        aria-label="Close"
+                        @click="newWorkspaceModalShow = ! newWorkspaceModalShow">
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-times" aria-hidden="true"></i>
+                          </span>
+                </button>
+            </div>
+            <header class="pf-v6-c-modal-box__header">
+                <div class="pf-v6-c-modal-box__header-main">
+                    <h2 class="pf-v6-c-modal-box__title" id="modal-sm-title">New Workspace</h2>
+                </div>
+            </header>
+            <div class="pf-v6-c-modal-box__body" id="modal-sm-description">
+
+
+
+                <form class="pf-v6-c-form" novalidate>
+                    <div class="pf-v6-c-form__group">
+                        <div class="pf-v6-c-form__group-label">
+                            <label class="pf-v6-c-form__label" for="-workspace-name">
+                                <span class="pf-v6-c-form__label-text">Workspace Name</span>&nbsp;<span class="pf-v6-c-form__label-required" aria-hidden="true">&#42;</span></label>
+                        </div>
+                        <div class="pf-v6-c-form__group-control" x-data="{ maxLength: 64, inputValue: '' }">
+                                      <span class="pf-v6-c-form-control pf-m-required">
+                                        <input
+                                                required
+                                                type="text"
+                                                id="-workspace-name"
+                                                name="-workspace-name"
+                                                aria-describedby="-workspace-name-helper"
+                                                :maxlength="maxLength"
+                                                x-model="inputValue"
+                                        />
+                                      </span>
+                            <small id="char-count">
+                                <span x-text="maxLength - inputValue.length"></span> characters remaining
+                            </small>
+                        </div>
+                    </div>
+                    <div
+                            class="pf-v6-c-form__group"
+                            role="radiogroup"
+                            aria-labelledby="form-demo-basic-time-zone-legend"
+                    >
+                        <div
+                                class="pf-v6-c-form__group-label"
+                                id="form-demo-basic-time-zone-legend"
+                        ><span class="pf-v6-c-form__label">
+        <span class="pf-v6-c-form__label-text">Server connection</span></span>
+                        </div>
+                        <div class="pf-v6-c-form__group-control pf-m-inline">
+                            <label class="pf-v6-c-switch" for="switch-label-check-1">
+                                <input
+                                        class="pf-v6-c-switch__input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="switch-label-check-1-2"
+                                        aria-labelledby="switch-label-check-1-text"
+                                        checked
+                                />
+
+                                <span class="pf-v6-c-switch__toggle">
+                                            <span class="pf-v6-c-switch__toggle-icon">
+                                              <i class="fas fa-check" aria-hidden="true"></i>
+                                            </span>
+                                          </span>
+                                <span
+                                        class="pf-v6-c-switch__label pf-m-on"
+                                        id="switch-label-check-1-text-2"
+                                        aria-hidden="true"
+                                >Work with server</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pf-v6-c-form__group pf-m-action">
+                        <div class="pf-v6-c-form__group-control">
+                            <div class="pf-v6-c-form__actions">
+                                <button class="pf-v6-c-button pf-m-primary" type="submit">
+                                    <span class="pf-v6-c-button__text">Submit</span>
+                                </button>
+                                <button
+                                        class="pf-v6-c-button pf-m-link"
+                                        type="button"
+                                        @click="newWorkspaceModalShow = ! newWorkspaceModalShow">
+                                    <span class="pf-v6-c-button__text">Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" x-data="theme" :class="{'pf-v6-theme-dark': theme === 'dark'}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🛝 Hery - Playground 🛝</title>
+        {{ template "style.html" . }}
+    </head>
+    <body x-data="page" x-resize.document="documentWidth = $width; documentHeight = $height">
+
+        <div x-data="tabSystem()" class="pf-v6-l-stack">
+            <!-- ################################### -->
+            <!-- ############## Header ############# -->
+            <!-- ################################### -->
+            {{ template "header.html" . }}
+
+            <!-- ################################### -->
+            <!-- ############# Middle ############## -->
+            <!-- ################################### -->
+            {{ template "main.html" . }}
+
+            <div class="pf-v6-l-stack__item" style="height:10em;border-top:1px solid grey;" id="component-eql">
+                <div class="pf-v6-l-split">
+                    <div class="pf-v6-l-split__item pf-m-fill">
+                        <div class="pf-v6-l-stack">
+                            <div class="pf-v6-l-stack__item" style="height: 5em;">
+                                <div id="eql-editor" style="width:100%;height:100%;"></div>
+                            </div>
+                            <!--<div class="pf-v6-l-stack__item pf-m-fill">pf-m-fill</div>-->
+                            <div class="pf-v6-l-stack__item" style="height: 5em; border-top:1px solid grey;">
+                                Result...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pf-v6-l-split__item" style="border-left:1px solid grey; border-right:1px solid grey;">
+                        <!-- fa-pause or fa-times -->
+                        <!-- fa-play -->
+                        <!-- fa-copy -->
+                        <button
+                                class="pf-v6-c-button pf-m-small pf-m-plain"
+                                type="button"
+                                aria-label="Run"
+                                title="Run EQL"
+                        >
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-play" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                        <hr class="pf-v6-c-divider" />
+                        <button
+                                class="pf-v6-c-button pf-m-small pf-m-plain"
+                                type="button"
+                                aria-label="Copy"
+                                title="Copy history"
+                        >
+                          <span class="pf-v6-c-button__icon">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </div>
+                    <div class="pf-v6-l-split__item">
+                        <ul class="pf-v6-c-list pf-m-plain pf-m-bordered" role="list" style="display: block; overflow: auto; max-height: 10em;">
+                            <li>Donec blandit a lorem id convallis.</li>
+                            <li>Integer in volutpat libero.</li>
+                            <li>Donec a diam tellus.</li>
+                            <li>Aenean nec tortor orci.</li>
+                            <li>Vivamus maximus ultricies pulvinar.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ################################### -->
+            <!-- ############## Footer ############## -->
+            <!-- ################################### -->
+            <footer class="pf-v6-l-stack__item" style="border-top:1px solid grey;">&copy; Amadla 🐰</footer>
+        </div>
+
+        <!-- Dropzone for the SQLite database -->
+        <!--<div id="dropzone" style="width: 400px; height: 400px; border: 2px dashed #ccc;">
+            Drag and drop your SQLite .db file here.
+        </div>-->
+
+
+        <!--
+               style="position: absolute; inset: 0px auto auto 0px; transform: translate(200px, 50px); z-index: 9999; opacity: 1; transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11);"
+               -->
+
+        {{ template "modal.html" . }}
+        {{ template "dropdown.html" . }}
+
+        <!----------------------------->
+        <!---------- Scripts ---------->
+        <!----------------------------->
+        {{ template "script.html" . }}
+    </body>
+</html>
