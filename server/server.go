@@ -70,7 +70,7 @@ func (s *SServer) templateSetup(path string) error {
 	}
 
 	// Parse all HTML files in the directory, including subdirectories
-	templates := template.Must(s.parseTemplates(absPath))
+	templates := templateMust(s.parseTemplates(absPath))
 	s.serverEngine.SetHTMLTemplate(templates)
 
 	return nil
@@ -81,16 +81,22 @@ func (s *SServer) router() {
 	// 1. Set the static file support
 	s.serverEngine.Static("/assets", StaticFilesPath)
 
-	// 2. Set the front end main endpoint
+	// 2. Add custom error handlers
+	s.serverEngine.Use(s.errorMiddleware()) // Catch panics for 500 errors
+	s.serverEngine.NoRoute(func(c *gin.Context) {
+		c.Header("Cache-Control", CacheControlHeaderValue)
+		c.HTML(404, "404.html", gin.H{})
+	})
+
+	// 3. Set the front end main endpoint
 	s.serverEngine.GET("/", func(c *gin.Context) {
 		c.Header("Cache-Control", CacheControlHeaderValue)
-		//c.File(IndexHtmlFilePath)
 		c.HTML(200, "index.html", gin.H{
 			"Title": "Hery Playground", // Pass additional variables if needed
 		})
 	})
 
-	// 3. ...
+	// 4. Example dynamic endpoint
 	s.serverEngine.GET("/:collectionName", func(c *gin.Context) {
 		// Retrieve the 'collectionName' from the URL
 		collectionName := c.Param("collectionName")
@@ -148,7 +154,7 @@ func (s *SServer) openConfig() {
 }*/
 
 func (s *SServer) parseTemplates(tmplRootPath string) (*template.Template, error) {
-	tmpl := template.New("")
+	tmpl := templateNew("")
 	err := filepathWalk(tmplRootPath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -173,4 +179,27 @@ func (s *SServer) parseTemplates(tmplRootPath string) (*template.Template, error
 		}
 	}
 	return tmpl, err
+}
+
+// Middleware to catch panics and render 500 error page
+func (s *SServer) errorMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		defer func() {
+			if r := recover(); r != nil {
+				// Log the error for debugging
+
+				// TODO: Maybe add support logs (check how server logs works)
+				//s.serverLogger.Errorf("Recovered from panic: %v", r)
+
+				// Respond with 500 error page
+				c.Header("Cache-Control", CacheControlHeaderValue)
+				c.HTML(500, "500.html", gin.H{
+					"Title": "Internal Server Error",
+					"Error": r,
+				})
+				c.Abort()
+			}
+		}()
+		c.Next()
+	}
 }
