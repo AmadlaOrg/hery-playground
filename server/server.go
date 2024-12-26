@@ -2,10 +2,9 @@ package server
 
 import (
 	"github.com/AmadlaOrg/hery-playground/server/controller"
+	"github.com/AmadlaOrg/hery-playground/server/template"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
-	"html/template"
-	"os"
 	"path/filepath"
 )
 
@@ -15,30 +14,30 @@ type IServer interface {
 
 type SServer struct {
 	controller   controller.IController
+	template     template.ITemplate
 	serverEngine *gin.Engine
 }
 
 var (
-	ginDefault   = gin.Default
-	filepathAbs  = filepath.Abs
-	templateMust = template.Must
-	templateNew  = template.New
-	filepathWalk = filepath.Walk
-	filepathExt  = filepath.Ext
+	filepathAbs = filepath.Abs
 )
 
 // Start is a method to start an HTTP server
 func (s *SServer) Start() error {
-	s.serverEngine = ginDefault()
+	//s.serverEngine = ginDefault()
 
 	// TODO: For debugging added to the config file
 	// env := os.Getenv("GIN_MODE")
 	gin.SetMode(gin.DebugMode)
 
-	err := s.templateSetup(TmplPath)
+	// Setup templates
+	err := s.template.Initialize(s.serverEngine, TmplPath)
 	if err != nil {
 		return err
 	}
+
+	s.template.StartTemplateWatcher()
+
 	s.router()
 
 	// TODO: Use configuration file tor the port
@@ -46,33 +45,6 @@ func (s *SServer) Start() error {
 	if err != nil {
 		return err
 	}
-	return nil
-}
-
-// templateSetup attaches templates to the server engine
-/*func (s *SServer) templateSetup(path string) error {
-	absPath, err := filepathAbs(path)
-	if err != nil {
-		return err
-	}
-
-	templates := templateMust(s.parseTemplates(absPath))
-	s.serverEngine.SetHTMLTemplate(templates)
-
-	return nil
-}*/
-
-// templateSetup attaches templates to the server engine
-func (s *SServer) templateSetup(path string) error {
-	absPath, err := filepathAbs(path)
-	if err != nil {
-		return err
-	}
-
-	// Parse all HTML files in the directory, including subdirectories
-	templates := templateMust(s.parseTemplates(absPath))
-	s.serverEngine.SetHTMLTemplate(templates)
-
 	return nil
 }
 
@@ -111,74 +83,6 @@ func (s *SServer) router() {
 // openConfig loads the server configurations
 func (s *SServer) openConfig() {
 	viper.SetConfigName("config")
-}
-
-// parseTemplates walks through the directory and parses all .html files
-/*func (s *SServer) parseTemplates(tmplRootPath string) (*template.Template, error) {
-	tmpl := templateNew("")
-	err := filepathWalk(tmplRootPath, func(path string, info os.FileInfo, err error) error { // Change to os.FileInfo
-		if err != nil {
-			return err
-		}
-		if !info.IsDir() && filepathExt(path) == ".html" { // Correct reference to IsDir
-			_, err = tmpl.ParseFiles(path)
-			if err != nil {
-				return err
-			}
-		}
-		return nil
-	})
-	return tmpl, err
-}*/
-
-// parseTemplates walks through the directory and parses all .html files
-/*func (s *SServer) parseTemplates(tmplRootPath string) (*template.Template, error) {
-	// Start with an empty template set
-	tmpl := template.New("")
-	err := filepathWalk(tmplRootPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		// Only parse .html files, skip directories
-		if !info.IsDir() && filepathExt(path) == ".html" {
-			// Parse the file and add it to the template set
-			println(path)
-			_, err = tmpl.ParseFiles(path)
-			if err != nil {
-				return err
-			}
-		}
-		return nil
-	})
-	return tmpl, err
-}*/
-
-func (s *SServer) parseTemplates(tmplRootPath string) (*template.Template, error) {
-	tmpl := templateNew("")
-	err := filepathWalk(tmplRootPath, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		if !info.IsDir() && filepathExt(path) == ".html" {
-			// TODO: Use a debug function (check flyaway project)
-			println("Parsing template:", path)
-			_, err = tmpl.ParseFiles(path)
-			if err != nil {
-				return err
-			}
-		}
-		return nil
-	})
-
-	// TODO: Move to debug
-	if err == nil {
-		// Log the names of registered templates
-		for _, t := range tmpl.Templates() {
-			// TODO: Use a debug function (check flyaway project)
-			println("Registered template:", t.Name())
-		}
-	}
-	return tmpl, err
 }
 
 // Middleware to catch panics and render 500 error page
