@@ -12,9 +12,10 @@ var (
 
 // NewServerService to set up the server service
 func NewServerService() IServer {
+	serverEngine := ginDefault()
 	return &SServer{
 		controller:   controller.NewControllerService(),
-		template:     template.NewTemplateService(TmplPath),
-		serverEngine: ginDefault(),
+		template:     template.NewTemplateService(serverEngine, TmplPath),
+		serverEngine: serverEngine,
 	}
 }

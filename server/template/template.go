@@ -10,10 +10,11 @@ import (
 )
 
 type ITemplate interface {
-	Initialize(serverEngine *gin.Engine, path string) error
+	Initialize()
 	StartTemplateWatcher()
 }
 type STemplate struct {
+	serverEngine    *gin.Engine
 	templatePath    string
 	templateAbsPath string
 }
@@ -27,19 +28,10 @@ var (
 )
 
 // Initialize attaches templates to the server engine
-func (s *STemplate) Initialize(serverEngine *gin.Engine, path string) error {
-	absPath, err := filepathAbs(path)
-	if err != nil {
-		return err
-	}
-
-	s.templateAbsPath = absPath
-
+func (s *STemplate) Initialize() {
 	// Parse all HTML files in the directory, including subdirectories
-	templates := templateMust(s.parseTemplates(absPath))
-	serverEngine.SetHTMLTemplate(templates)
-
-	return nil
+	templates := templateMust(s.parseTemplates(s.templateAbsPath))
+	s.serverEngine.SetHTMLTemplate(templates)
 }
 
 // templateSetup attaches templates to the server engine

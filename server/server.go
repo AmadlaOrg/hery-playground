@@ -24,24 +24,21 @@ var (
 
 // Start is a method to start an HTTP server
 func (s *SServer) Start() error {
-	//s.serverEngine = ginDefault()
-
 	// TODO: For debugging added to the config file
 	// env := os.Getenv("GIN_MODE")
 	gin.SetMode(gin.DebugMode)
 
 	// Setup templates
-	err := s.template.Initialize(s.serverEngine, TmplPath)
-	if err != nil {
-		return err
-	}
+	s.template.Initialize()
 
+	// TODO: Only for dev mode?
 	s.template.StartTemplateWatcher()
 
+	// Setup router
 	s.router()
 
 	// TODO: Use configuration file tor the port
-	err = s.serverEngine.Run(":8080")
+	err := s.serverEngine.Run(":8080")
 	if err != nil {
 		return err
 	}
