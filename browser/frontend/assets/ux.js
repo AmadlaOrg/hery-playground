@@ -38,12 +38,16 @@ function featureCheck() {
  *
  * @returns {{init(): void, setInfoModal(*): void, infoModalShow: boolean}}
  */
-function page() {
+/*function page() {
     return {
         // Modals
         infoModalShow: false,
         settingsModalShow: false,
         newWorkspaceModalShow: false,
+
+        // Elements size
+        headerHeight: 0,
+        headerToolbarOptionsWidth: 0,
 
         // Document width and height that changes with resizing
         documentWidth: 0,
@@ -53,6 +57,10 @@ function page() {
             this.setInfoModal(this.infoModal)
             this.setSettingsModal(this.settingsModalShow)
             this.setNewWorkspaceModalShow(this.newWorkspaceModalShow)
+            this.setHeaderHeight()
+            this.setHeaderToolbarOptionsWidth()
+            this.updateDocumentSize(); // Initialize size on page load
+            window.addEventListener('resize', this.updateDocumentSize.bind(this));
         },
 
         setInfoModal(status) {
@@ -65,6 +73,165 @@ function page() {
 
         setNewWorkspaceModalShow(status) {
             this.newWorkspaceModalShow = status
+        },
+
+        setHeaderHeight() {
+            const header = document.getElementById('header');
+            if (header) {
+                this.headerHeight = header.getBoundingClientRect().height;
+            }
+        },
+
+        setHeaderToolbarOptionsWidth() {
+            const toolbarOptions = document.getElementById('header-toolbar-options');
+            if (toolbarOptions) {
+                this.headerToolbarOptionsWidth = toolbarOptions.getBoundingClientRect().width;
+            }
+        },
+
+        updateDocumentSize() {
+            this.documentWidth = window.innerWidth;
+            this.documentHeight = window.innerHeight;
+        },
+
+        calculateMenuPosition() {
+            // Use dynamic header height and add 25px
+            const menuTop = this.headerHeight + 25;
+
+            // Position menu relative to the toolbar options
+            const menuLeft = this.headerToolbarOptionsWidth;
+
+            return `transform: translate(${menuLeft}px, ${menuTop}px);`;
+        },
+
+        // :style="position: absolute; inset: 0px auto auto 0px;
+        // ${calculateMenuPosition()};
+        // width: 246px;
+        // z-index: 9999;
+        // opacity: 1;
+        // transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11);"
+        get menuStyle() {
+            return {
+                position: 'absolute',
+                inset: '0px auto auto 0px',
+                ...this.calculateMenuPosition(),
+                width: '246px',
+                zIndex: '9999',
+                opacity: '1',
+                transition: 'opacity cubic-bezier(0.54, 1.5, 0.38, 1.11)',
+            };
+        },
+    };
+}*/
+
+function page() {
+    return {
+        // Modals
+        infoModalShow: false,
+        settingsModalShow: false,
+        newWorkspaceModalShow: false,
+
+        // Elements size
+        headerHeight: 0,
+        headerToolbarOptionsWidth: 0,
+
+        // Document width and height that changes with resizing
+        documentWidth: 0,
+        documentHeight: 0,
+
+        // Menu style object
+        menuStyle: {},
+
+        init() {
+            this.setInfoModal(this.infoModalShow);
+            this.setSettingsModal(this.settingsModalShow);
+            this.setNewWorkspaceModalShow(this.newWorkspaceModalShow);
+            this.updateDocumentSize(); // Initialize size on page load
+            this.setHeaderHeight();
+            this.setHeaderToolbarOptionsWidth();
+            this.updateMenuStyle(); // Initialize menu style
+            window.addEventListener('resize', this.handleResize.bind(this));
+        },
+
+        setInfoModal(status) {
+            this.infoModalShow = status;
+        },
+
+        setSettingsModal(status) {
+            this.settingsModalShow = status;
+        },
+
+        setNewWorkspaceModalShow(status) {
+            this.newWorkspaceModalShow = status;
+        },
+
+        setHeaderHeight() {
+            const header = document.getElementById('header');
+            if (header) {
+                this.headerHeight = header.getBoundingClientRect().height;
+            }
+        },
+
+        setHeaderToolbarOptionsWidth() {
+            const toolbarOptions = document.getElementById('header-toolbar-options');
+            if (toolbarOptions) {
+                this.headerToolbarOptionsWidth = toolbarOptions.getBoundingClientRect().width;
+            } else {
+                console.warn("Toolbar options element not found.");
+                this.headerToolbarOptionsWidth = 0; // Fallback to avoid NaN
+            }
+        },
+
+        updateDocumentSize() {
+            this.documentWidth = window.innerWidth;
+            this.documentHeight = window.innerHeight;
+        },
+
+        calculateMenuPosition() {
+            // Debug log
+            /*console.log("Header Toolbar Options Width:", this.headerToolbarOptionsWidth);
+            console.log("Header Height:", this.headerHeight);
+
+            const menuTop = this.headerHeight + 25; // Dynamic vertical position
+            const menuLeft = this.headerToolbarOptionsWidth; // Dynamic horizontal position
+
+            return `translate(${menuLeft}px, ${menuTop}px)`;*/
+            // Use dynamic document width and calculate menu left position
+            const menuTop = this.headerHeight + 4; // Add header height and offset
+            const dropdownMenu = document.getElementById('dropdown-menu-workspace');
+            let menuLeft = 0;
+
+            if (dropdownMenu) {
+                const dropdownWidth = dropdownMenu.getBoundingClientRect().width;
+                menuLeft = (this.documentWidth - dropdownWidth) - 4; // Align to document width
+            } else {
+                console.warn("Dropdown menu element not found.");
+            }
+
+            console.log("Document Width:", this.documentWidth);
+            console.log("Menu Top:", menuTop);
+            console.log("Menu Left:", menuLeft);
+
+            return `translate(${menuLeft}px, ${menuTop}px)`;
+        },
+
+        updateMenuStyle() {
+            this.menuStyle = {
+                position: 'absolute',
+                inset: '0px auto auto 0px',
+                transform: this.calculateMenuPosition(),
+                width: '246px',
+                zIndex: '9999',
+                opacity: '1',
+                transition: 'opacity cubic-bezier(0.54, 1.5, 0.38, 1.11)',
+            };
+        },
+
+        handleResize() {
+            this.updateDocumentSize();
+            this.setHeaderHeight();
+            this.setHeaderToolbarOptionsWidth();
+            this.updateMenuStyle(); // Recalculate menu style on resize
         },
     };
 }

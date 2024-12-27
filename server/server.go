@@ -31,17 +31,20 @@ func (s *SServer) Start() error {
 	// Setup templates
 	s.template.Initialize()
 
-	// TODO: Only for dev mode?
-	s.template.StartTemplateWatcher()
-
 	// Setup router
 	s.router()
+
+	// TODO: Only for dev mode?
+	if gin.Mode() == gin.DebugMode {
+		go s.template.StartTemplateWatcher()
+	}
 
 	// TODO: Use configuration file tor the port
 	err := s.serverEngine.Run(":8080")
 	if err != nil {
 		return err
 	}
+
 	return nil
 }
 
