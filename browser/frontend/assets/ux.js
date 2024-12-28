@@ -142,6 +142,33 @@ function page() {
         // Menu style object
         menuStyle: {},
 
+        // Workspace menu
+        searchWorkspace: '', // Current search input value
+        // TODO: this needs to be removed
+        workspaceMenuItems: [
+            "A very, very long name to test what happens",
+            "Action 2 - aaa",
+            "Action 3 - longer!",
+            "Action 4 - making longer and longer and longer",
+            "Action 5 - longer",
+            "Action 6 - Change again",
+            "Action 7",
+            "Action 8",
+            "Action 9",
+            "Action 10",
+            "Action 11",
+            "Action 12"
+        ],
+        workspaceFilteredItems: [],
+
+        workspaceFilterMenu() {
+            // Filter items based on the search term
+            const term = this.searchWorkspace.toLowerCase();
+            this.workspaceFilteredItems = this.workspaceMenuItems.filter(item =>
+                item.toLowerCase().includes(term)
+            );
+        },
+
         init() {
             this.setInfoModal(this.infoModalShow);
             this.setSettingsModal(this.settingsModalShow);
@@ -150,6 +177,7 @@ function page() {
             this.setHeaderHeight();
             this.setHeaderToolbarOptionsWidth();
             this.updateMenuStyle(); // Initialize menu style
+            this.workspaceFilteredItems = this.workspaceMenuItems;
             window.addEventListener('resize', this.handleResize.bind(this));
         },
 
@@ -202,28 +230,30 @@ function page() {
             let menuLeft = 0;
 
             if (dropdownMenu) {
-                const dropdownWidth = dropdownMenu.getBoundingClientRect().width;
+                //console.log("this.headerToolbarOptionsWidth: --- "+this.headerToolbarOptionsWidth)
+                //console.log("dropdownMenu.getBoundingClientRect().width: "+dropdownMenu.getBoundingClientRect().width)
+                const dropdownWidth = this.headerToolbarOptionsWidth; //dropdownMenu.getBoundingClientRect().width;
                 menuLeft = (this.documentWidth - dropdownWidth) - 4; // Align to document width
             } else {
                 console.warn("Dropdown menu element not found.");
             }
 
-            console.log("Document Width:", this.documentWidth);
+            /*console.log("Document Width:", this.documentWidth);
             console.log("Menu Top:", menuTop);
-            console.log("Menu Left:", menuLeft);
+            console.log("Menu Left:", menuLeft);*/
 
             return `translate(${menuLeft}px, ${menuTop}px)`;
         },
 
         updateMenuStyle() {
             this.menuStyle = {
-                position: 'absolute',
-                inset: '0px auto auto 0px',
+                position: "absolute",
+                inset: "0px auto auto 0px",
+                width: "246px",
+                zIndex: "9999",
+                opacity: "1",
+                transition: "opacity cubic-bezier(0.54, 1.5, 0.38, 1.11)",
                 transform: this.calculateMenuPosition(),
-                width: '246px',
-                zIndex: '9999',
-                opacity: '1',
-                transition: 'opacity cubic-bezier(0.54, 1.5, 0.38, 1.11)',
             };
         },
 

@@ -1,4 +1,4 @@
-<div class="pf-v6-c-menu pf-m-scrollable" id="dropdown-menu-workspace" :style="menuStyle">
+<div class="pf-v6-c-menu pf-m-scrollable dropdown-menu" id="dropdown-menu-workspace" :style="menuStyle">
     <div class="pf-v6-c-menu__search">
         <div class="pf-v6-c-menu__search-input">
             <div class="pf-v6-c-text-input-group">
@@ -11,6 +11,8 @@
                                     class="pf-v6-c-text-input-group__text-input"
                                     type="text"
                                     placeholder="Search"
+                                    x-model="searchWorkspace"
+                                    @input="workspaceFilterMenu"
                                     value
                                     aria-label="Search input"
                             />
@@ -22,66 +24,13 @@
     <hr class="pf-v6-c-divider" />
     <div class="pf-v6-c-menu__content">
         <ul class="pf-v6-c-menu__list" role="menu">
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">A very, very long name to test what happens</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 2 - aaa</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 3 - longer!</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 4 - making longer and longer and longer</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 5 - longer</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 6 - Change again</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 7</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 8</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 9</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 10</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 11</span>
-                </button>
-            </li>
-            <li class="pf-v6-c-menu__list-item" role="none">
-                <button class="pf-v6-c-menu__item" type="button" role="menuitem">
-                    <span class="pf-v6-c-menu__item-text">Action 12</span>
-                </button>
-            </li>
+            <template x-for="(item, index) in workspaceFilteredItems" :key="index">
+                <li class="pf-v6-c-menu__list-item" role="none">
+                    <button class="pf-v6-c-menu__item" type="button" role="menuitem">
+                        <span class="pf-v6-c-menu__item-text" x-text="item"></span>
+                    </button>
+                </li>
+            </template>
         </ul>
     </div>
     <div class="pf-v6-c-menu__footer">

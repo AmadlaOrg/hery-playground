@@ -62,12 +62,6 @@
                             <span class="pf-v6-c-button__text">Create Workspace</span>
                         </button>
                     </div>
-                    <div>
-                        <i>Resize your browser window to see the document width and height values change.</i>
-                        <br><br>
-                        <p x-text="'Width: ' + documentWidth + 'px'">Width: 2558px</p>
-                        <p x-text="'Height: ' + documentHeight + 'px'">Height: 2449.5px</p>
-                    </div>
                     <div x-data="{ count: $persist(0) }">
                         <button :click="count++">Increment</button>
                         <span x-text="count"></span>

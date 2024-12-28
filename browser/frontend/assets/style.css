@@ -18,3 +18,12 @@
 .tab-content {
     display: none;
 }
+
+.dropdown-menu {
+    position: absolute !important;
+    inset: 0px auto auto 0px !important;
+    width: 246px !important;
+    z-index: 9999 !important;
+    opacity: 1 !important;
+    transition: opacity cubic-bezier(0.54, 1.5, 0.38, 1.11) !important;
+}
